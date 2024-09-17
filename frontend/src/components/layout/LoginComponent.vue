@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isLoggedIn" class="login-container">
-    <img src="../assets/logo-solplay.png" alt="Company Logo" class="login-logo" />
+    <img src="@/assets/logo-solplay.png" alt="Company Logo" class="login-logo" />
     <form class="login-form" @submit.prevent="login">
       <label for="email">Usuario:</label>
       <input id="email" v-model="email" required />

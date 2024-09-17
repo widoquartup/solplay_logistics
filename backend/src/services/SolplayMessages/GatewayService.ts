@@ -9,7 +9,7 @@ import TransitAck from './models/messages/received/TransitAck';
 import CircuitState from './models/messages/received/CircuitState';
 import CartState, { CartStateProcess } from './models/messages/received/CartState';
 import StationState from './models/messages/received/StationState';
-import { canSendTransit,  getMessageFromQueueForSend, getTransit, logClassGetters, sleep} from './helpers/Helpers';
+import { canSendTransit,  getCartBitValuesFromDecimalStatus,  getMessageFromQueueForSend, getTransit, logClassGetters, sleep} from './helpers/Helpers';
 import StationService from './services/StationService';
 // import { PendingStorageRepository } from '@src/app/Resources/Almacen/PendingStorage/PendingStorageRepository';
 import { MessageService } from '@src/app/Resources/Message/MessageService';
@@ -22,8 +22,10 @@ import { MessageQueueFromToType } from '@src/app/Resources/MessageQueue/MessageQ
 import { Order } from '@src/app/Resources/PendingStorage/PendingStorageType';
 import ProcessOrdersStorage from './ProcessOrdersStorage';
 import GestionAlmacenService from './services/GestionAlmacenService';
+import WinstonLogger from '../Logger/Services/WinstonLogger';
 // import OrderQueueProcessService from './OrderQueueProcessService';
 // import { setTokenSourceMapRange } from 'typescript';
+
 
 interface OrderInTransit{
     from: any;
@@ -63,6 +65,7 @@ class GatewayService {
     private processOrderStorage: ProcessOrdersStorage;
     private readyToLoadInStation100: boolean;
     private tcpConnectionAllowed: boolean = true;
+    private logger: WinstonLogger = new WinstonLogger();
     constructor() {
         this.readyToLoadInStation100 = false;
         this.processOrderStorage = new ProcessOrdersStorage();
@@ -140,7 +143,7 @@ class GatewayService {
     showStatus(){
         // console.log("this.waitingAck",this.waitingAck);
         // console.log("this.hasTransitToParkingPending",this.hasTransitToParkingPending);
-        console.log("this.readyForTransit",this.readyForTransit);
+        // console.log("this.readyForTransit",this.readyForTransit);
         // console.log("this.lastCartStatus",this.lastCartStatus);
         // console.log("this.lastStationId",this.lastStationId);
         // console.log("Podemos ver si hay mensajes en cola?",(this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) );
@@ -175,7 +178,7 @@ class GatewayService {
 
         // procesar los mensajes
         messages.forEach( (message: string) => {
-
+            this.logger.info('IN>>>'+message+'<<<');
             const objectReceived = processMessage.process(message);
     
                 if (objectReceived instanceof Nack) {
@@ -198,8 +201,6 @@ class GatewayService {
                     this.processAfterStationState(objectReceived);
                 }
         });
-
-
     }
     
     async processAfterNack(nack: Nack): Promise<void> {
@@ -213,21 +214,30 @@ class GatewayService {
         this.processOrderInTransit(ack);
         console.log(colors.green("ACK, se puede enviar una nueva orden", logClassGetters(ack)));
         this.waitingAck = false;
-        await sleep(2);
+        // await sleep(2);
         this.processNextMessage();
     }
     async processAfterTransitAck(transitAck: TransitAck): Promise<void> {
-        this.processOrderInTransit(transitAck);
+        // this.processOrderInTransit(transitAck);
         console.log(colors.green("TransitAck, se puede enviar una nueva orden", logClassGetters(transitAck)));
-        await sleep(2);
+        // await sleep(2);
         this.waitingAck = false;
         // this.processNextMessage();
-        
     }
 
-    async processOrderInTransit( status: Ack | TransitAck ): Promise<void> {
+    // si recibimos un Nack, procesamos la orderInTransit y messageQueue
+    async cancelOrderInTransitWithNack(status:Nack){
         const srcMsgId = parseInt(status.srcMsgId);
-        console.log("processOrderInTransit", this.orderInTransit.order);
+        // if (!this.orderInTransit.from.msg_id == srcMsgId ){
+        //     return;
+        // }
+    }
+
+    // solo trabajamos con la orden en tránsito solo si recibimos un Ack
+    async processOrderInTransit( status: Ack | TransitAck ): Promise<void> {
+
+        const srcMsgId = parseInt(status.srcMsgId);
+        // console.log("processOrderInTransit", this.orderInTransit.order);
         // const orderInTransit = await this.processMessageQueue.getByMessageId(msg_id);
         // if (!orderInTransit){
         //     return;
@@ -261,19 +271,23 @@ class GatewayService {
     }
 
     async processAfterCartState(cartState: CartState): Promise<void> {
-        
+        console.log("processAfterCartState", cartState);
         this.lastCartStatus = parseInt(cartState.cartStatus);
         // comprueba si podemos seguir con los mensajes pendientes
-        this.readyForTransit = canSendTransit(this.lastCartStatus);
 
+        // probamos la consulta a este método dentro del processNextMessage porque están saliendo mensajes qeu no deberían
+        this.readyForTransit = canSendTransit(this.lastCartStatus);
+        // this.logger.info("CART STATUS>>" + JSON.stringify(getCartBitValuesFromDecimalStatus(this.lastCartStatus)));
         // comprueba si puede procesar los mensajes desde el gateway que indican que hay carga.
-        this.stationService.tryProcessLoadOnStation100(cartState);
-        this.processNextMessage();
+        if (this.readyForTransit){
+            this.stationService.tryProcessLoadOnStation100(cartState);
+            this.processNextMessage();
+        }
     }
 
     async processNextMessage(){
-        console.log("Buscando nuevos mensajes");
-        console.log("this.tcpClient.isConnected", this.tcpClient.isConnected());
+        // console.log("Buscando nuevos mensajes");
+        // console.log("this.tcpClient.isConnected", this.tcpClient.isConnected());
         if (!this.tcpClient.isConnected()){
             //-->console.log("No está conectado.. conectando.");
             this.tryTcpConnect();
@@ -282,7 +296,12 @@ class GatewayService {
         // parar el timeout
         clearTimeout(this.timeoutId);
         // if (!this.waitingAck && (this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) ){
-        if ((this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) ){
+        // if ((this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) ){
+        
+        // Consultamos por el último estado para saber si podemos hacer tránsitos
+        const canIsendTransit:boolean = canSendTransit(this.lastCartStatus);
+        if (this.readyForTransit){
+            console.log(`lastCartStatus=${this.lastCartStatus}  canIsendTransit`, canIsendTransit);
             const nextMessage = await this.processMessageQueue.getNextMessagePending();
 
             // No hay mensajes en cola y la última estación es la de entrega, enviar el carro a la estación 25
@@ -290,7 +309,7 @@ class GatewayService {
                 const msgId = await this.getNextMessageId();
                 // const msgTo = getTransit(msgId, CART_PARKING as number);
                 // await this.send(msgTo.getData(), msgTo.getType(), true);
-                const msgTo:string = " 12" + msgId.toString().padEnd(5) + "    1"+"   33";
+                const msgTo:string = " 15" + msgId.toString().padEnd(5) + "    1"+"   33";
                 await this.send(msgTo, 15, true);
                 this.hasTransitToParkingPending = false;
                 this.lastStationId = CART_PARKING as number;
@@ -327,7 +346,7 @@ class GatewayService {
                 msg = nextMessage.to;
                 if (this.orderInTransit && this.orderInTransit.to){
                     nextMessage.to.msg_id = msgId; 
-                    console.log(nextMessage);
+                    // console.log(nextMessage);
                     this.orderInTransit.to.msg_id = msgId;
                     this.orderInTransit.toAck = false;
                     this.orderInTransit.toNack = false;
@@ -429,6 +448,8 @@ class GatewayService {
         if (waitingAck){
             this.waitingAck = waitingAck;
         }
+        this.logger.info('OUT>>>'+message+'<<<');
+
         // //-->console.log("Nuevo mensaje creado:", nuevoMensaje);
         // const verificacion = await this.MessageService.show(nuevoMensaje._id as string);
         // //-->console.log('Verificación inmediata:', verificacion);

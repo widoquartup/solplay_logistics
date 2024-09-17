@@ -8,6 +8,7 @@ import { AlmacenType } from './AlmacenType';
 import { TransportParameterType } from './AlmacenTypes';
 import { context } from '@base/context';
 import GestionAlmacenService from '@src/services/SolplayMessages/services/GestionAlmacenService';
+import { getCartBitValuesFromDecimalStatus } from '@src/services/SolplayMessages/helpers/Helpers';
 // import colors from 'cli-color';
 
 class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
@@ -84,6 +85,15 @@ class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
         }
         
         res.locals.response = { data: "OK" };
+        res.status(200);
+        next();
+        return ;
+    }
+    async calc(req: Request, res: Response, next: NextFunction) {
+        res.locals.params = req.params;
+        const keys = Object.keys(req.params);
+        // const entity = await this.service.show(req.params[keys[0]]);
+        res.locals.response = { data: getCartBitValuesFromDecimalStatus(parseInt(req.params[keys[0]])) };
         res.status(200);
         next();
         return ;

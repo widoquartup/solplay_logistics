@@ -8,7 +8,7 @@ class WinstonLogger implements LoggerInterface {
   constructor() {
     const dailyRotateFileTransportInfo = new transports.DailyRotateFile({
       level: 'info',
-      filename: 'logs/info-%DATE%.log', // Formato de nombre de archivo con fecha
+      filename: 'logs/logistics/in-out-%DATE%.log', // Formato de nombre de archivo con fecha
       datePattern: 'YYYY-MM-DD', // Patrón de fecha
       zippedArchive: true, // Comprimir archivos antiguos
       maxSize: '20m', // Tamaño máximo del archivo
@@ -18,7 +18,7 @@ class WinstonLogger implements LoggerInterface {
     // Transporte para logs de nivel 'error'
     const dailyRotateFileTransportError = new transports.DailyRotateFile({
       level: 'error',
-      filename: 'logs/errors-%DATE%.log', // Formato de nombre de archivo con fecha
+      filename: 'logs/logistics/in-out-errors-%DATE%.log', // Formato de nombre de archivo con fecha
       datePattern: 'YYYY-MM-DD', // Patrón de fecha
       zippedArchive: true, // Comprimir archivos antiguos
       maxSize: '20m', // Tamaño máximo del archivo

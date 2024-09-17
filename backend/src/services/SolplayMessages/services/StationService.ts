@@ -65,9 +65,9 @@ class StationService {
     // Comprobar si podemos procesar los mensajes de las estaciones de carga.
     tryProcessLoadOnStation100(cartState: CartState){
         const cartStateProcess = new CartStateProcess(cartState);
-        // if (cartStateProcess.canProcessMessagesFromStation100()){
+        if (cartStateProcess.canProcessMessagesFromStation100()){
             this.processLastStationState();
-        // }
+        }
     }
 
     processLastStationState(){

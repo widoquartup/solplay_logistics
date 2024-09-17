@@ -28,19 +28,12 @@ class ProcessResultMessage {
     
 
 
-    process(data: string): (Ack | TransitAck | Nack | CartState | CircuitState | StationState | { message: string }) {
-    // process(data: string): (Ack | TransitAck | Nack | CartState | CircuitState | StationState | { message: string })[] {
+    process(stringData: string): (Ack | TransitAck | Nack | CartState | CircuitState | StationState | { message: string }) {
         this.init();
-        // Remove the first value
-        const dataSliced = data.slice(1);
-        // Remove the last value
-        const dataSlicedComplete = dataSliced.slice(0, data.length - 1);
-        const stringData = dataSlicedComplete.toString();
-        console.log("STX = ",   `{ "msg": "${stringData.substring(0)}" }`) ;
 
-        const orderType = parseInt(stringData.substr(0, 3), 10);
-
-        // const messages:array = [];
+        const orderType = parseInt(stringData.substring(0, 3), 10);
+        // console.log("DATA", stringData);
+        // console.log("orderType", orderType);
 
         if (orderType === 100) {
             this._isTransistAck = true;
@@ -119,6 +112,7 @@ class ProcessResultMessage {
         while ((match = regex.exec(input)) !== null) {
             messages.push(match[1]); // Agregamos el contenido sin STX y ETX
         }
+        // console.log(`${messages.length} MENSAJES RECIBIDOS `, messages);
     
         return messages;
     }

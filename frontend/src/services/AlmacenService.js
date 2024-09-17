@@ -50,7 +50,7 @@ class TransportService extends BaseService {
   async cancelTransit() {
     // console.log("Service cancelTransit");
     try {
-      const response = await this.doPut(`/almacen/cancel-transit`, null );
+      const response = await this.doPut(`/almacen/transit/cancel`, null );
       return response.data;
     } catch (error) {
       console.error('Error while cancel transit:', error);

@@ -55,7 +55,7 @@ class SocketHandler {
   emitMessage(event: string, data: string | object) {
     if (this.io) {
       this.io.emit(event, data);
-      console.log("EMITIENDO",event, data);
+      // console.log("EMITIENDO",event, data);
     } else {
       console.error('Socket.IO no ha sido inicializado');
     }

@@ -90,15 +90,16 @@ export class TransportService {
 
 
   async cancelTransit() {
-    const cancelTransitsModel = new CancelTransit();
-    cancelTransitsModel.setType(20);
+    // const cancelTransitsModel = new CancelTransit();
+    // cancelTransitsModel.setType(20);
     const msgId = await context.message.getNextMessageId();
-    cancelTransitsModel.setMsgId(msgId);
-    cancelTransitsModel.setCartId(1);
-
+    // cancelTransitsModel.setMsgId(msgId);
+    // cancelTransitsModel.setCartId(1);
+    const msgString:string = " 20"+msgId.toString().padStart(5)+"    1";
     console.log("Cancelar tránsito ");
-    console.log('Load Data:', cancelTransitsModel, new Date().toUTCString());
-    await context.message.send(cancelTransitsModel.getData(), cancelTransitsModel.getType());
+    // console.log('Load Data:', cancelTransitsModel, new Date().toUTCString());
+    await context.message.send(msgString, 20);
+    // await context.message.send(cancelTransitsModel.getData(), cancelTransitsModel.getType());
     return { data: "OK", code: 200 };
   }
 

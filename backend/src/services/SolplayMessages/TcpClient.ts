@@ -1,6 +1,7 @@
 import * as net from 'net';
 import * as dotenv from 'dotenv';
 // import * as colors from 'cli-color';
+import WinstonLogger from '../Logger/Services/WinstonLogger';
 
 dotenv.config(); // Load environment variables from .env
 
@@ -19,7 +20,7 @@ class TcpClient {
     private client: net.Socket | null;
     private readonly reconnectInterval: number = 5000;
     private readonly heartbeatInterval: number = 30000;
-
+    private logger: WinstonLogger = new WinstonLogger();
     constructor(callbackHandleData: (data: Buffer) => void = () => null) {
         this.host = HOST;
         this.port = Number(PORT);
@@ -33,6 +34,7 @@ class TcpClient {
 
     connect(): void {
         this.client = net.connect(this.port, this.host, () => {
+            this.logger.info("TCP CONNECTED");
             console.log(`\nConexión establecida con el servidor ${this.host}:${this.port}`);
             this.fnHandleData(Buffer.from("CONNECTED", 'utf-8'));
             this._isConnected = true;
@@ -52,6 +54,7 @@ class TcpClient {
         });
 
         this.client.on('end', () => {
+            this.logger.info("TCP DISCONNECTED");
             this.fnHandleData(Buffer.from("DISCONNECTED (evento end)", 'utf-8'));
             if (this._isConnected) {
                 console.log('Conexión cerrada por el servidor.');
@@ -60,16 +63,19 @@ class TcpClient {
         });
 
         this.client.on('error', (err: NetworkError) => {
+            this.logger.info("TCP ECONNRESET");
             if (err.code === 'ECONNRESET') {
                 // this._isConnected = false;
                 console.error('Connection reset by peer');
             } else {
+            this.logger.info("TCP ERROR");
                 // this._isConnected = false;
                 console.error('Error occurred:', err);
             }
         });
 
         this.client.on('close', (hadError: boolean) => {
+            this.logger.info("TCP CLOSED");
             this.fnHandleData(Buffer.from("DISCONNECTED (evento close)", 'utf-8'));
             if (this._isConnected) {
                 console.log(hadError ? 'Conexión cerrada debido a un error.' : 'Conexión cerrada.');

@@ -21,6 +21,7 @@ class AccessController extends ControllerBase<AccessType, AccessService> {
 
     async login(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
+            // console.log("req.body", req.body)
             const headers = this.extractRequestInfo(req);
             const { email, password } = req.body;
             const dataLogin = { ...{ email, password }, ...headers } as RequestAuthType;
