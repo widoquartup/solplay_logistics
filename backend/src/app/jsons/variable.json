@@ -1,0 +1,55 @@
+{
+    "name": "variable",
+    "deep": "",
+    "fields": [
+        {
+            "name": "name",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "group",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "value",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        }
+    }
+}

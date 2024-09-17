@@ -1,0 +1,2017 @@
+{
+  "info": {
+    "name": "Solplay-api",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "items": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "user/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "user/:user_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/:user_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('user_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "user/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "user/:user_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/:user_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "user/:user_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/:user_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user",
+                "{{user_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "user/:user_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/user/:user_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "user",
+                "{{user_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Access",
+      "item": [
+        {
+          "name": "access/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "/auth/access/api-key",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"apiKey\": \"{{apiKey}}\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/api-key",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access",
+                "api-key"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Guardar token en el entorno\", function () {                        var jsonData = pm.response.json();                        pm.environment.set(\"token\", jsonData.token);                    });                    pm.test(\"Guardar refreshToken en el entorno\", function () {                        var jsonData = pm.response.json();                        pm.environment.set(\"refreshToken\", jsonData.refresToken);                    });"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "access/:access_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/:access_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access",
+                "{{access_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('access_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "access/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "access/:access_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/:access_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access",
+                "{{access_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "access/:access_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/:access_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access",
+                "{{access_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "access/:access_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/access/:access_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "access",
+                "{{access_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Almacen",
+      "item": [
+        {
+          "name": "almacen/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "almacen/:almacen_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/:almacen_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "{{almacen_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('almacen_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "almacen/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "almacen/:almacen_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/:almacen_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "{{almacen_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "almacen/:almacen_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/:almacen_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "{{almacen_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "almacen/:almacen_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/almacen/:almacen_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "{{almacen_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PendingStorage",
+      "item": [
+        {
+          "name": "pendingstorage/",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "Authorization": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "pendingstorage/:pendingStorage_id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "Authorization": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/:pendingStorage_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage",
+                "{{pendingStorage_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "pendingstorage/",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "Authorization": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "pendingstorage/:pendingStorage_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/:pendingStorage_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage",
+                "{{pendingStorage_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "pendingstorage/:pendingStorage_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/:pendingStorage_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage",
+                "{{pendingStorage_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "pendingstorage/:pendingStorage_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pending-storage/:pendingStorage_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "almacen",
+                "pending-storage",
+                "{{pendingStorage_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Message",
+      "item": [
+        {
+          "name": "message/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "message/:message_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/:message_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "{{message_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('message_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "message/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "message/:message_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/:message_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "{{message_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "message/:message_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/:message_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "{{message_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "message/:message_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/:message_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "{{message_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CompletedFasesOrder",
+      "item": [
+        {
+          "name": "ordenfinalizada/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "ordenfinalizada/:completedFasesOrder_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/:completedFasesOrder_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada",
+                "{{completedFasesOrder_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "ordenfinalizada/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "ordenfinalizada/:completedFasesOrder_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/:completedFasesOrder_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada",
+                "{{completedFasesOrder_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "ordenfinalizada/:completedFasesOrder_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/:completedFasesOrder_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada",
+                "{{completedFasesOrder_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "ordenfinalizada/:completedFasesOrder_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orden-finalizada/:completedFasesOrder_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orden-finalizada",
+                "orden-finalizada",
+                "{{completedFasesOrder_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MessageResponse",
+      "item": [
+        {
+          "name": "messageresponse/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messageresponse/:messageResponse_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/:messageResponse_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response",
+                "{{messageResponse_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messageresponse/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "messageresponse/:messageResponse_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/:messageResponse_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response",
+                "{{messageResponse_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messageresponse/:messageResponse_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/:messageResponse_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response",
+                "{{messageResponse_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messageresponse/:messageResponse_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message-response/:messageResponse_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message-response",
+                "message-response",
+                "{{messageResponse_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "MessageQueue",
+      "item": [
+        {
+          "name": "messagequeue/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messagequeue/:messageQueue_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/:messageQueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue",
+                "{{messageQueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messagequeue/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "messagequeue/:messageQueue_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/:messageQueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue",
+                "{{messageQueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messagequeue/:messageQueue_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/:messageQueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue",
+                "{{messageQueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "messagequeue/:messageQueue_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/message/queue/message_queue/:messageQueue_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "message",
+                "queue",
+                "message_queue",
+                "{{messageQueue_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Orderqueue",
+      "item": [
+        {
+          "name": "orderqueue/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "orderqueue/:orderqueue_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/:orderqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue",
+                "{{orderqueue_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('orderqueue_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "orderqueue/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "orderqueue/:orderqueue_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/:orderqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue",
+                "{{orderqueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "orderqueue/:orderqueue_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/:orderqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue",
+                "{{orderqueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "orderqueue/:orderqueue_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/orderqueue/orderqueue/:orderqueue_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "orderqueue",
+                "orderqueue",
+                "{{orderqueue_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Variable",
+      "item": [
+        {
+          "name": "variable/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "variable/:variable_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/:variable_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable",
+                "{{variable_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('variable_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "variable/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "variable/:variable_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/:variable_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable",
+                "{{variable_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "variable/:variable_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/:variable_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable",
+                "{{variable_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "variable/:variable_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/variable/:variable_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "variable",
+                "{{variable_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

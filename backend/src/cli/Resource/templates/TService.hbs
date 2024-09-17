@@ -1,0 +1,12 @@
+// {{upperResource}}Service.ts
+import { ServiceBase } from '{{base}}/Bases/ServiceBase';
+import { {{ upperResource }}Repository } from './{{upperResource}}Repository';
+import { {{ upperResource }}Type } from './{{upperResource}}Type';
+// import type { FindQueryParams } from "@base/Bases/__interfaces/FindQueryParams";
+// import type { FindResult } from "@base/Bases//__interfaces/FindResult";
+export class {{upperResource}}Service extends ServiceBase<{{upperResource}}Type> {
+  constructor(repository: {{upperResource}}Repository) {
+    super(repository);
+  }
+  // Sobrescribir métodos si es necesario
+}

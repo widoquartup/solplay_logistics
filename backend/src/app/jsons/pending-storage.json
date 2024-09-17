@@ -1,0 +1,61 @@
+{
+    "name": "pending-storage",
+    "deep": "",
+    "fields": [
+        {
+            "name": "level",
+            "required": true,
+            "type": "number"
+        },
+        {
+            "name": "pending",
+            "required": true,
+            "type": "boolean"
+        },
+        {
+            "name": "order",
+            "required": true,
+            "type": "object"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "cargaToldo": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        }
+    }
+}

@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"38b9018428124fff8b30663cd88857b9","collectionName":"completed_fases_orders","type":"collection"}

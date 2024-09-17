@@ -1,0 +1,19 @@
+// {{upperResource}}Controller.ts
+import { ControllerBase } from '{{base}}/Bases/ControllerBase';
+import { {{upperResource}}Service } from './{{upperResource}}Service';
+import { {{upperResource}}Repository } from './{{upperResource}}Repository';
+import { {{upperResource}}Model } from './{{upperResource}}Model';
+import { {{upperResource}}Type } from './{{upperResource}}Type';
+
+class {{upperResource}}Controller extends ControllerBase<{{upperResource}}Type, {{upperResource}}Service> {
+    constructor(service: {{upperResource}}Service) {
+        super(service);
+        // Si creas un nuevo método, tienes que hacer un bind para usar las propiedades de la clase base
+        // Ej. this.nuevoMetodo = this.nuevoMetodo.bind(this);
+    }
+}
+
+const repository = new {{upperResource}}Repository({{upperResource}}Model);
+const service = new {{upperResource}}Service(repository);
+const {{lowerResource}}Controller = new {{upperResource}}Controller(service);
+export { {{lowerResource}}Controller };

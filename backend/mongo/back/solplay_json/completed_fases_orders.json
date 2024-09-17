@@ -1,0 +1,3 @@
+[
+{"_id":{"$oid":"66cc8db3c7fd2183a9df556b"},"order_number":{"$numberInt":"66575"},"status":"C","delivered":false,"delivery_date":{"$date":{"$numberLong":"1716588000000"}},"quantity":{"$numberInt":"7"},"delivered_quantity":{"$numberInt":"0"},"isDeleted":false,"createdAt":{"$date":{"$numberLong":"1724681651153"}},"updatedAt":{"$date":{"$numberLong":"1724766731153"}},"__v":{"$numberInt":"0"}}
+]

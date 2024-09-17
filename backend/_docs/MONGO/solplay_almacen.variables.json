@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "66cdb58bb1d5ec0c044f8524"
+  },
+  "name": "lastChecked",
+  "group": "consumer_CompletedFasesOrder",
+  "value": "\"2024-08-27T12:41:35.447Z\"",
+  "type": "Date",
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-08-27T11:16:27.530Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-27T12:41:35.535Z"
+  },
+  "__v": 0
+}]

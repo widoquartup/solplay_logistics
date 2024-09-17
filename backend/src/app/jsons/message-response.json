@@ -1,0 +1,55 @@
+{
+    "name": "message-response",
+    "deep": "message-response",
+    "fields": [
+        {
+            "name": "msg_id",
+            "required": true,
+            "type": "number"
+        },
+        {
+            "name": "response",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "processed",
+            "required": true,
+            "type": "number"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        }
+    }
+}

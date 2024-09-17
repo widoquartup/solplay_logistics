@@ -1,0 +1,13 @@
+// {{upperResource}}Model.ts
+import mongoose, { Document, Schema } from 'mongoose';
+import { {{upperResource}}Type } from './{{upperResource}}Type';
+
+const {{lowerResource}}Schema = new Schema({
+  {{{mongoDefs}}}
+  isDeleted: { type: Boolean, default: false, select: false }
+}, {
+    timestamps: true, // Añade automáticamente los campos createdAt y updatedUt
+    strict: true,
+});
+
+export const {{upperResource}}Model = mongoose.model<{{upperResource}}Type & Document>('{{upperResource}}', {{lowerResource}}Schema);

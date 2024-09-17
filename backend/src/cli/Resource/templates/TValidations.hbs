@@ -1,0 +1,13 @@
+// validaciones del recurso {{ upperResource }}
+import { z } from 'zod';
+
+{{{consts}}} 
+
+const {{ upperResource }}Schema = z.object({
+    {{object}}
+});
+
+const {{ upperResource }}CreationSchema = {{ upperResource }}Schema.extend({});
+const {{ upperResource }}UpdateSchema = {{ upperResource }}Schema.partial();
+
+export { {{ upperResource }}CreationSchema, {{ upperResource }}UpdateSchema };

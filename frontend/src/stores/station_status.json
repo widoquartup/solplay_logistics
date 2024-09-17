@@ -1,0 +1,1577 @@
+[
+    {
+        "estacion": "1", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "2", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "3", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "4", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "5", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "6", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "7", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "8", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "9", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "10", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "11", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "12", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "13", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "14", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "15", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "16", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "17", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "18", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "19", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "20", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "21", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "22", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "23", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "24", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "25", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "26", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "27", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "28", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "29", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "30", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "31", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "32", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "33", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "34", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "35", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "36", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "37", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "38", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "39", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "40", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "41", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "42", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "43", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "44", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "45", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "46", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "47", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "48", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "49", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "50", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "51", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "52", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "53", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "54", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "55", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "56", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "57", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "58", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "59", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "1"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "1"
+            }
+        ]
+    },
+    {
+        "estacion": "60", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "61", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "62", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    },
+    {
+        "estacion": "63", 
+        "positions": [
+            {
+                "type": "1", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "1", 
+                "level": "2", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "1", 
+                "status": "x"
+            },
+            {
+                "type": "3", 
+                "level": "2", 
+                "status": "x"
+            }
+        ]
+    }
+]

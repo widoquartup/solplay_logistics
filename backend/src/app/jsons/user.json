@@ -1,0 +1,55 @@
+{
+    "name": "user",
+    "deep": "auth",
+    "fields": [
+        {
+            "name": "name",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "email",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "password",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "metadata",
+            "required": false,
+            "type": "object"
+        },
+        {
+            "name": "app",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": []
+        },
+        "show": {
+            "base": []
+        },
+        "store": {
+            "base": [
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": []
+        },
+        "softDelete": {
+            "base": []
+        }
+    }
+}

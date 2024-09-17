@@ -1,0 +1,104 @@
+[
+    {
+      "name": "ok",
+      "hex_value": "0x000000",
+      "description": "Ninguna combinación ha fallado.",
+      "value": 0
+    },
+    {
+      "name": "cart_lost",
+      "hex_value": "0x000001",
+      "description": "No hay comunicación con algún carro.",
+      "value": 1
+    },
+    {
+      "name": "cart_wrong_os_version",
+      "hex_value": "0x000002",
+      "description": "Carro(s) no actualizado(s). [Imagen S.O.]",
+      "value": 2
+    },
+    {
+      "name": "cart_wrong_program_version",
+      "hex_value": "0x000004",
+      "description": "Carro(s) no actualizado(s). [Programa]",
+      "value": 4
+    },
+    {
+      "name": "cart_wrong_firmware_version",
+      "hex_value": "0x000008",
+      "description": "Carro(s) no actualizado(s). [Firmware]",
+      "value": 8
+    },
+    {
+      "name": "cart_wrong_map",
+      "hex_value": "0x000010",
+      "description": "Carro(s) no actualizado(s). [Mapa].",
+      "value": 16
+    },
+    {
+      "name": "cart_emergency_armed",
+      "hex_value": "0x000020",
+      "description": "Puerta de emergencia a ser abierta.",
+      "value": 32
+    },
+    {
+      "name": "all_carts_no_power",
+      "hex_value": "0x000080",
+      "description": "Necesario circuito de poder a ser abierto.",
+      "value": 128
+    },
+    {
+      "name": "cart_emergency_freeze",
+      "hex_value": "0x000100",
+      "description": "Carro(s) en modo emergency freeze.",
+      "value": 256
+    },
+    {
+      "name": "cart_traffic_check_failed",
+      "hex_value": "0x000400",
+      "description": "Algún carro no para cuando control de tráfico (Puerta) está abierto(a).",
+      "value": 1024
+    },
+    {
+      "name": "door_open",
+      "hex_value": "0x000800",
+      "description": "Una puerta asignada a un carro no está cerrada.",
+      "value": 2048
+    },
+    {
+      "name": "xport_interrupted",
+      "hex_value": "0x001000",
+      "description": "Un evento presente en el carro ha sido interrumpido.",
+      "value": 4096
+    },
+    {
+      "name": "overvoltage",
+      "hex_value": "0x002000",
+      "description": "Voltaje sobre el límite.",
+      "value": 8192
+    },
+    {
+      "name": "undervoltage",
+      "hex_value": "0x004000",
+      "description": "Voltaje no alcanza el mínimo.",
+      "value": 16384
+    },
+    {
+      "name": "cart_overcurrent",
+      "hex_value": "0x008000",
+      "description": "Amperaje supera el límite.",
+      "value": 32768
+    },
+    {
+      "name": "cart_wrong_firmware_version",
+      "hex_value": "0x000008",
+      "description": "Carro(s) no actualizado(s). [Firmware]",
+      "value": 8
+    },
+    {
+      "name": "power_supplies_fail",
+      "hex_value": "0x020000",
+      "description": "Fallo de fuentes de alimentación de poder.",
+      "value": 1048576
+    }
+  ]

@@ -1,0 +1,76 @@
+// routes for {{ upperResource }} resource
+import express, { RequestHandler } from 'express';
+
+import auth from '@base/Middlewares/auth';
+
+import { {{ lowerResource }}Controller } from './{{upperResource}}Controller';
+
+import {{validateReq}} from '{{base}}/Middlewares/validateReq';
+{{#if fullValidation}}
+import { {{ upperResource }}CreationSchema, {{ upperResource }}UpdateSchema } from './{{upperResource}}Validations';
+{{/if}}
+{{#if creationSchema}}
+import { {{ upperResource }}CreationSchema } from './{{upperResource}}Validations';
+{{/if}}
+{{#if updateSchema}}
+import { {{ upperResource }}UpdateSchema } from './{{upperResource}}Validations';
+{{/if}}
+{{#if fullValidation}}
+const validateStore = ValidateReq({{ upperResource }}CreationSchema);
+const validateUpdate = ValidateReq({{ upperResource }}UpdateSchema);
+{{/if}}
+{{#if creationSchema}}
+const validateStore = ValidateReq({{ upperResource }}CreationSchema)
+{{/if}}
+{{#if updateSchema}}
+const validateUpdate = ValidateReq({{ upperResource }}UpdateSchema)
+{{/if}}
+
+const router = express.Router();
+
+// middlewares get
+{{#if index}}
+{{{index}}}
+{{else}}
+const indexMiddlewares: RequestHandler[] = [];
+{{/if}}
+// middlewares show
+{{#if show}}
+{{{show}}}
+{{else}}
+const showMiddlewares: RequestHandler[] = [];
+{{/if}}
+// middlewares store
+{{#if store}}
+{{{store}}}
+{{else}}
+const storeMiddlewares: RequestHandler[] = [];
+{{/if}}
+// middlewares update
+{{#if update}}
+{{{update}}}
+{{else}}
+const updateMiddlewares: RequestHandler[] = [];
+{{/if}}
+// middlewares delete
+{{#if delete}}
+{{{delete}}}
+{{else}}
+const deleteMiddlewares: RequestHandler[] = [];
+{{/if}}
+// middlewares softDelete
+{{#if softDelete}}
+{{{softDelete}}}
+{{else}}
+const softDeleteMiddlewares: RequestHandler[] = [];
+{{/if}}
+
+router.get('/', indexMiddlewares, {{ lowerResource }}Controller.index);
+router.get('/:{{ lowerResource }}_id', showMiddlewares, {{ lowerResource }}Controller.show);
+router.post('/', storeMiddlewares, {{ lowerResource }}Controller.store);
+router.put('/:{{ lowerResource }}_id', updateMiddlewares, {{ lowerResource }}Controller.update);
+router.delete('/:{{ lowerResource }}_id', deleteMiddlewares, {{ lowerResource }}Controller.delete);
+router.patch('/:{{ lowerResource }}_id/softDelete', softDeleteMiddlewares, {{ lowerResource }}Controller.softDelete);
+
+// Exportar el router
+export default router;

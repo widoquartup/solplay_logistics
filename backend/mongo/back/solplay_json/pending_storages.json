@@ -1,0 +1,3 @@
+[
+{"_id":{"$oid":"66bcb671c5da8b8dea5c3c00"},"level":{"$numberInt":"1"},"codigo_barras":"22.B386.66488.5.100.1","pending":true,"order":{"number":"66488","bulto":{"$numberInt":"1"},"fecha_entrega":"2022-03-08","delivery_ready":false,"detalle":"TOLDO B.I. CITY 9010","cantidad":{"$numberInt":"1"},"cantidad_fabricada":{"$numberInt":"0"}},"isDeleted":false,"createdAt":{"$date":{"$numberLong":"1723643505189"}},"updatedAt":{"$date":{"$numberLong":"1723643505189"}},"__v":{"$numberInt":"0"}}
+]

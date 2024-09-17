@@ -1,0 +1,46 @@
+[
+    {
+        "path": "/api/file",
+        "module": "./base/Files/routes"
+    },
+    {
+        "path": "/api/auth/user",
+        "module": "./app/Resources/Auth/User/UserRoutes"
+    },
+    {
+        "path": "/api/auth/access",
+        "module": "./app/Resources/Auth/Access/AccessRoutes"
+    },
+    {
+        "path": "/api/almacen",
+        "module": "./app/Resources/Almacen/AlmacenRoutes"
+    },
+    {
+        "path": "/api/pending-storage",
+        "module": "./app/Resources/PendingStorage/PendingStorageRoutes"
+    },
+    {
+        "path": "/api/message",
+        "module": "./app/Resources/Message/MessageRoutes"
+    },
+    {
+        "path": "/api/completed-fases-orders",
+        "module": "./app/Resources/CompletedFasesOrder/CompletedFasesOrderRoutes"
+    },
+    {
+        "path": "/api/message-response",
+        "module": "./app/Resources/MessageResponse/MessageResponseRoutes"
+    },
+    {
+        "path": "/api/message-queue",
+        "module": "./app/Resources/MessageQueue/MessageQueueRoutes"
+    },
+    {
+        "path": "/api/orderqueue",
+        "module": "./app/Resources/Orderqueue/OrderqueueRoutes"
+    },
+    {
+        "path": "/api/variable",
+        "module": "./app/Resources/Variable/VariableRoutes"
+    }
+]

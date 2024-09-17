@@ -1,0 +1,57 @@
+{
+    "name": "messagequeue",
+    "deep": "messagequeue",
+    "fields": [
+        {
+            "name": "data",
+            "required": true,
+            "type": "object"
+        },
+        {
+            "name": "pending",
+            "required": true,
+            "type": "boolean",
+            "mustBeTrue": true
+        },
+        {
+            "name": "deleted",
+            "required": true,
+            "type": "boolean",
+            "mustBeTrue": false
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        }
+    }
+}

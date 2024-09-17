@@ -1,0 +1,3 @@
+[
+{"_id":{"$oid":"66cdb58bb1d5ec0c044f8524"},"name":"lastChecked","group":"consumer_CompletedFasesOrder","value":"\"2024-08-27T12:41:35.447Z\"","type":"Date","isDeleted":false,"createdAt":{"$date":{"$numberLong":"1724757387530"}},"updatedAt":{"$date":{"$numberLong":"1724762495535"}},"__v":{"$numberInt":"0"}}
+]

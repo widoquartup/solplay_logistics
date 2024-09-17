@@ -1,0 +1,65 @@
+{
+    "name": "access",
+    "deep": "auth",
+    "fields": [
+        {
+            "name": "user_id",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "ip_address",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "origin",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "agent",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "expiresAt",
+            "required": true,
+            "type": "date"
+        },
+        {
+            "name": "is_revoked",
+            "required": true,
+            "type": "boolean"
+        },
+        {
+            "name": "refreshtoken_id",
+            "required": true,
+            "type": "string"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": []
+        },
+        "show": {
+            "base": []
+        },
+        "store": {
+            "base": [
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": []
+        },
+        "softDelete": {
+            "base": []
+        }
+    }
+}

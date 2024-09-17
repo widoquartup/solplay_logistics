@@ -1,0 +1,61 @@
+STATION TYPE:  OJO=>Mirando desde el carro al ascensor
+------------
+Left = 1	IZQUIERDA Mirando desde el carro al ascensor
+Middle = 2  CENTRO
+Right = 3   DERECHA Mirando desde el carro al ascensor
+
+LEVEL:
+-----
+1 = interior
+2 = exterior
+
+STATION IDS:
+100 = Estación donde recoger
+1-60 = almacén
+102 = Estación donde entregar
+
+
+
+
+
+Para buscar en estación donde deja el
+ elevador
+load
+station_id? 100
+station_type? (1 Left  / 3 Right)
+level(0:15)? 3 (esto es solo para la de carga)
+
+
+Para el almacén
+station id= 1 hasta 60
+station_type? L-R (1 3)
+level = 1 interior 2 exterior
+
+Para descarga
+station id=102
+station_type? 2
+level = 0
+
+Cuando hay carga del ascensor, recibiré
+>>>[|STX|202    6  100    11|ETX|]
+New station: {
+	"box_ready" :	true,
+	"msg_id" :	6,
+	"station_id" :	100,
+	"station_type" :	1 ó 3	,
+	"type" :	"Transit_cmd_type::202"
+}
+.
+Luego mandamos a LOAD y UNLOAD al almacén o a descargar
+y cuando ya hizo la carga recibiré
+>>>[|STX|202    7  100    10|ETX|]
+Station id 100 Station type 1: box_ready: 1 -> 0.
+
+
+Order_type: station_state.
+Campo				Longitud		Descripción
+type				3				station_state. Ver Order_type.
+msg_id				5				Identificador de mensaje. Incrementado en cada nuevo mensaje.
+station_id			5				Identificador de la estación
+station_type		5				Tipo de la estación
+box_ready			1				Indica si tenemos una carga disponible o no

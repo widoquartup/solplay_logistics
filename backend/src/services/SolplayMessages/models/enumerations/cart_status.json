@@ -1,0 +1,74 @@
+[
+    {
+      "name": "none",
+      "value": 0,
+      "hex_value": "0x0000",
+      "description": "Ningún bit activo."
+    },
+    {
+      "name": "cart_error",
+      "value": 1,
+      "hex_value": "0x0001",
+      "description": "El carro no puede ser usado. Se requiere intervención manual."
+    },
+    {
+      "name": "hook_error",
+      "value": 2,
+      "hex_value": "0x0002",
+      "description": "Idem referido al hook."
+    },
+    {
+      "name": "warning",
+      "value": 4,
+      "hex_value": "0x0004",
+      "description": "Problema transitorio (pulsador de paro, seta de emergencia, etc.). Cuando se restablezca continuará funcionando normalmente."
+    },
+    {
+      "name": "paused",
+      "value": 8,
+      "hex_value": "0x0008",
+      "description": "Movimiento pausado desde el gateway. Cuando se reactive continuará normalmente."
+    },
+    {
+      "name": "manual_mode",
+      "value": 16,
+      "hex_value": "0x0010",
+      "description": "Movimiento manual controlado desde el gateway."
+    },
+    {
+      "name": "maintenance",
+      "value": 32,
+      "hex_value": "0x0020",
+      "description": "El carro no acepta nuevos tránsitos. Si no hay otra condición que lo impida continuará sirviendo el/los tránsito(s) que tiene asignado(s)."
+    },
+    {
+      "name": "busy",
+      "value": 64,
+      "hex_value": "0x0040",
+      "description": "Se está sirviendo un tránsito."
+    },
+    {
+      "name": "ready",
+      "value": 128,
+      "hex_value": "0x0080",
+      "description": "El carro puede aceptar un nuevo tránsito. La combinación busy+ready es posible: indica que puede aceptar un nuevo tránsito para ser ejecutado después del actual."
+    },
+    {
+      "name": "parking",
+      "value": 256,
+      "hex_value": "0x0100",
+      "description": "El carro está en un zona de parking."
+    },
+    {
+      "name": "loaded",
+      "value": 512,
+      "hex_value": "0x0200",
+      "description": "Hay carga en el hook. Si el hook no puede detectar la presencia de carga es una suposición basada en el último tránsito."
+    },
+    {
+      "name": "house_keeping",
+      "value": 1024,
+      "hex_value": "0x0400",
+      "description": "El carro está indisponible temporalmente. Desencadenado por un comando de ?idle_processing? o equivalente desde el gateway."
+    }
+  ]

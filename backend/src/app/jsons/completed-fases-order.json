@@ -1,0 +1,66 @@
+{
+    "name": "completed-fases-order",
+    "deep": "completed-fases-order",
+    "fields": [
+        {
+            "name": "order_number",
+            "required": true,
+            "type": "number"
+        },
+        {
+            "name": "status",
+            "required": false,
+            "type": "string"
+        },
+        {
+            "name": "delivered",
+            "required": false,
+            "type": "boolean",
+            "mustBeTrue": false
+        },
+        {
+            "name": "delivery_date",
+            "required": false,
+            "type": "Date"
+        },
+        {
+            "name": "quantity",
+            "required": false,
+            "type": "number"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        }
+    }
+}

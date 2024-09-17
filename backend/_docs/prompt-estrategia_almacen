@@ -1,0 +1,155 @@
+Tengo un almacén que consta de 63 posiciones y cada posición con 4 espacios de carga.
+Además hay una estación de carga donde se recibe la mercadería y una estación de descarga
+Cada espacio puede tener un status OK, o KO, si es OK puede estar reservado con una orden e indicar si está cargada o vacía. 
+Si el espacio tiene status KO no se pueden utilizar.
+La posición 1 es la posición más cercana a la carga y la posición 63 la más cercana a la entrega.
+Tendré órdenes de fabricación que tendrán una cantidad de bultos y fecha de entrega.
+En base a esta información tendré que gestionar las ubicaciones dentro del almacén.
+Me interesa que las órdenes con fecha de entrega más próxima a la actual reserven espacios cerca de la estación de entrega.
+En el momento que reciba un mensaje de que la estación de carga tiene una orden, comprobamos que en el almacén no haya espacios reservados para esta orden.
+
+La estructura en datos de mi almacén está en una base de datos mongo
+Además mi sistema está en typescript y express.
+La estructura del almacén es la siguiente:
+{
+  "_id": {
+    "$oid": "66bcc796e371a878f9363aac"
+  },
+  "station_id": 5,
+  "station_type": 1,
+  "level": 1,
+  "loaded": false,
+  "status_ok": true,
+  "isDeleted": false,
+  "preferent_order": 1,
+  "order": {
+    "number": "66575",
+    "bulto": 1,
+    "fecha_entrega": "2022-03-08",
+    "delivery_ready": false,
+    "detalle": "TOLDO B.I. CITY 9010",
+    "cantidad": 1,
+    "cantidad_fabricada": 0
+  },
+  "processing": true,
+  "createdAt": {
+    "$date": "2024-08-14T15:04:54.763Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-27T15:10:20.180Z"
+  },
+  "__v": 0
+}
+
+station_id puede tener el valor de 1 a 64
+station_type puede tener un valor 1 o 3
+level puede tener un valor 1 o 2
+station_type y level indican la posición teniendo en cuenta que station_type:1, level 1 es la posición 1, 1:2 posición 2, 2:1 posicion 3 y 2:2 posicón 4.
+
+
+Mi necesidad actual es a partir de que tengo que reservar espacios para esa orden teniendo en cuenta los espacios disponibles (status OK y sin una orden asignada)
+Si una orden tiene una cantidad de 2 bultos, trataremos de que se distribuya en una estación (station_id) y que use los espacios de una station_type 1:1 y 1:2 o bien 2:1 y 2:2.
+Puedes pensar una estrategia para realizar esta necesidad que te comento teniendo en cuenta que las fechas más cercanas a la entrega deben estar más cerca de la estación de entrega.
+
+
+
+---------
+
+Tengo un almacén que consta de 63 posiciones y cada posición con 4 espacios de carga.
+El modelo que define cada posición es el siguiente
+```typescript
+import mongoose, { Document, Schema } from 'mongoose';
+import { AlmacenType } from './AlmacenType';
+
+const almacenSchema = new Schema({
+  station_id: { type: Number, required: true },
+  station_type: { type: Number, required: true },
+  level: { type: Number, required: true },
+  order: {type: Object, required: false },
+  loaded: { type: Boolean, default: false },
+  status_ok: { type: Boolean, default: true },
+  processing: { type: Boolean, default: false },
+  preferent_order: { type: Number, default: 0 },
+  isDeleted: { type: Boolean, default: false, select: false }
+}, {
+    timestamps: true, // Añade automáticamente los campos createdAt y updatedAt
+    strict: true,
+    unique: [{ station_id: 1, station_type: 1, level: 1 }]
+});
+// Add a compound index to ensure uniqueness of the combination
+almacenSchema.index({ station_id: 1, station_type: 1, level: 1 }, { unique: true });
+export const AlmacenModel = mongoose.model<AlmacenType & Document>('Almacen', almacenSchema, 'storages');
+````
+station_id puede tener el valor de 1 a 63
+station_type puede tener un valor 1 o 3
+level puede tener un valor 1 o 2
+station_type y level indican la posición teniendo en cuenta que station_type:1, level 1 es la posición 1, 1:2 posición 2, 2:1 posicion 3 y 2:2 posicón 4.
+
+Necesito crear un orden de preferencia y guardar en la colección preferentOrder que siga el siguiente patrón según estación y posición (station_type, level).
+desde la estación 63 a la 1
+posición 63 1:2 = 1
+posición 63 1:1 = 127
+posición 63 2:1 = 128
+posición 63 2:2 = 2
+posición 62 1:2 = 3
+posición 62 1:1 = 129
+posición 62 2:1 = 130
+posición 62 2:1 = 4
+Por favor, necesito un JSON para hacer un update que pueda ejecutar en mongo.
+El update debería tener como quero station_id = ? station_type = ? y level = ?, y actualice el orden de prioridad preferent_order
+
+--------
+
+
+
+
+
+Tengo un almacén que consta de 63 posiciones y cada posición con 4 espacios de carga.
+Además hay una estación de carga donde se recibe la mercadería y una estación de descarga
+Cada espacio puede tener un status OK, o KO, si es OK puede estar reservado con una orden e indicar si está cargada o vacía. 
+Si el espacio tiene status KO no se pueden utilizar.
+La posición 1 es la posición más cercana a la carga y la posición 63 la más cercana a la entrega.
+Tendré órdenes de fabricación que tendrán una cantidad de bultos y fecha de entrega.
+En base a esta información tendré que gestionar las ubicaciones dentro del almacén.
+Me interesa que las órdenes con fecha de entrega más próxima a la actual reserven espacios cerca de la estación de entrega.
+En el momento que reciba un mensaje de que la estación de carga tiene una orden, comprobamos que en el almacén no haya espacios reservados para esta orden.
+
+La estructura en datos de mi almacén está en una base de datos mongo
+Además mi sistema está en typescript y express.
+La estructura del almacén es la siguiente:
+{
+  "_id": {
+    "$oid": "66bcc796e371a878f9363aac"
+  },
+  "station_id": 5,
+  "station_type": 1,
+  "level": 1,
+  "loaded": false,
+  "status_ok": true,
+  "isDeleted": false,
+  "preferent_order": 1,
+  "order": {
+    "number": "66575",
+    "bulto": 1,
+    "fecha_entrega": "2022-03-08",
+    "delivery_ready": false,
+    "detalle": "TOLDO B.I. CITY 9010",
+    "cantidad": 1,
+    "cantidad_fabricada": 0
+  },
+  "processing": true,
+  "createdAt": {
+    "$date": "2024-08-14T15:04:54.763Z"
+  },
+  "updatedAt": {
+    "$date": "2024-08-27T15:10:20.180Z"
+  },
+  "__v": 0
+}
+station_id puede tener el valor de 1 a 63
+station_type puede tener un valor 1 o 3
+level puede tener un valor 1 o 2
+
+Necesito reservar espacios para esa orden teniendo en cuenta los espacios disponibles (status OK y sin una orden asignada)
+Usar la propiedad preferent_order para elegir los espacios libres
+

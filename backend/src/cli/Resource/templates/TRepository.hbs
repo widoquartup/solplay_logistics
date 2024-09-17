@@ -1,0 +1,12 @@
+// {{upperResource}}Repository.ts
+import { {{ upperResource }}Type } from './{{upperResource}}Type';
+import mongoose from 'mongoose';
+import { RepositoryBase } from '{{base}}/Bases/RepositoryBase';
+
+
+export class {{ upperResource }}Repository extends RepositoryBase <{{ upperResource }}Type> {
+  constructor(model: mongoose.Model<{{ upperResource }}Type>) {
+    super(model);
+  }
+}
+

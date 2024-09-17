@@ -1,0 +1,96 @@
+{
+  "id": "unique-identifier1",
+  "name": "Solplay-api",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8880/api",
+      "enabled": true
+    },
+    {
+      "key": "api_key",
+      "value": "AK-sp1234",
+      "enabled": true
+    },
+    {
+      "key": "email",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "password",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "refreshToken",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "user_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "access_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "input_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "prueba_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "almacen_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "pendingStorage_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "message_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "completedFasesOrder_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "messageResponse_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "messageQueue_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "orderqueue_id",
+      "value": null,
+      "enabled": true
+    },
+    {
+      "key": "variable_id",
+      "value": null,
+      "enabled": true
+    }
+  ]
+}

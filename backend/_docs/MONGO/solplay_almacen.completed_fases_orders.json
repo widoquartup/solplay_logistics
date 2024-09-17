@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "66db0c6dbfd22810d61895ba"
+  },
+  "order_number": 66563,
+  "status": "C",
+  "delivered": false,
+  "delivery_date": {
+    "$date": "2024-05-02T22:00:00Z"
+  },
+  "detail": "TOLDO B.I. CITY 9010",
+  "quantity": 1,
+  "delivered_quantity": 2,
+  "isDeleted": false,
+  "createdAt": {
+    "$date": "2024-09-06T14:06:37.774Z"
+  },
+  "updatedAt": {
+    "$date": "2024-09-09T14:11:58.065Z"
+  },
+  "__v": 0
+}]

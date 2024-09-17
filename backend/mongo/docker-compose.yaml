@@ -1,0 +1,23 @@
+services:
+  solplay:
+    image: mongodb/mongodb-community-server:7.0.5-ubi9
+    container_name: solplay_mongodb
+    hostname: mongodbhost
+    user: root
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Quartup!01
+      MONGO_INITDB_DATABASE: solplay_almacen
+    volumes:
+      - ./data/configdb:/data/configdb
+      - ./data/db:/data/db
+      - ./certs:/certs 
+    ports:
+      - "27017:27017"
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
+
