@@ -24,6 +24,7 @@ import { TransportService } from './TransportService';
 import { CompletedFasesOrderType } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderType';
 import router from '@base/Files/routes';
 import CartState, { CartStateProcess } from '../models/messages/received/CartState';
+import { canSendTransit } from '../helpers/Helpers';
 dotenv.config();
 
 class StationService {
@@ -72,7 +73,8 @@ class StationService {
 
     isCartReadyForNewMessage(cartState: CartState){
         const cartStateProcess = new CartStateProcess(cartState);
-        return cartStateProcess.isCartReadyForNewMessage();
+        // console.log("CART STATUS", cartState.cartStatus, cartState);
+        return canSendTransit(parseInt(cartState.cartStatus)) && cartStateProcess.isCartReadyForNewMessage();
     }
 
 

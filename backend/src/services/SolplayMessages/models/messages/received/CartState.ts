@@ -305,51 +305,47 @@ export class CartStateProcess{
     }
     
     isCartReadyForNewMessage():boolean{
-        // comprobar las 2 ordenes que vienen en CARTSTATE ANTES DE ENVIAR
+        // Order_use.
+        // unused	0	El tránsito no está en uso.
+        // previous	1	El tránsito ha terminado y ha sido reemplazado por el siguiente.
+        // current	2	Éste es el tránsito en curso actual.
+        // next	    3	Siguiente tránsito a ejecutar.
         
-        // use: 
-        // unused: 0
-        // previouse: 1
-        // current: 2
-        // next:3 
-        
-        // 0 y 0 true
-        // 0 y 1 true
-        // 1 y 0 true
-        // 1 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
-        // 2 y 1 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
-        // 2 y 3 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
-        // 3 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
-        
-        // 0 y 2 true
-        // 2 y 0 true
-        
-        // 3 y 1 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
-        // 1 y 3 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
-        
-        // 3 y 0 true
-        // 0 y 3 true
+        // Transit_phase.
+        // none	        0	El tránsito no está en uso o no se está ejecutando.
+        // go_transit	1	El carro se dirige a la estación o el nodo de destino.
+        // transiting	2	El carro está efectuando el tránsito (load, transit, unload).
+        // transit_done	3	El tránsito ha terminado.
 
+        // SE PUEDE ENVIAR SI
+        // A)	alguna de las dos “unused” 
+        // B)	una “previous” y la otra “current”
+        // C)	una “current” y la otra “next”, en este caso comprobar: 
+        //          	phase: “transit_done”
         
-        for( let index1:number = 0; index1<2;index1++){
-            const order1: TransitOrder|null = this.transitOrders[index1];
-            const order2: TransitOrder|null = this.transitOrders[(index1 == 0) ? 1: 0];
-            if (order1 == null || order2 == null  ){
-                return false;
+        const order1: TransitOrder|null = this.transitOrders[0];
+        const order2: TransitOrder|null = this.transitOrders[1];
+        if (order1 == null || order2 == null  ){
+            return false;
+        }
+        // A)
+        if ( parseInt(order1.use) == 0 || parseInt(order2.use) == 0 ){
+            return true;
+        }
+        // B)
+        if ( parseInt(order1.use)+parseInt(order2.use) == 3){
+            return true;
+        }
+        // C)
+        if ( parseInt(order1.use)+parseInt(order2.use) == 5 ){
+            if (parseInt(order1.use) == 2 && parseInt(order1.phase) == 3){
+                return true;
             }
-
-            if ( parseInt(order1.use) == 1 && parseInt(order1.phase) !== 3 ){
-                return false;
-            }
-            if ( parseInt(order1.use) == 2 && parseInt(order1.phase) !== 3){
-                return false;
-            }
-            if ( parseInt(order1.use) == 3 && parseInt(order1.phase) !== 3){
-                return false;
+            if (parseInt(order2.use) == 2 && parseInt(order2.phase) == 3){
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
     
 

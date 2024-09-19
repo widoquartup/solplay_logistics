@@ -276,7 +276,7 @@ class GatewayService {
         this.lastCartStatus = parseInt(cartState.cartStatus);
 
         // Comprueba si el carro está listo para nuevos mensajes
-        this.readyForTransit = canSendTransit(this.lastCartStatus) && this.stationService.isCartReadyForNewMessage(cartState);
+        this.readyForTransit = this.stationService.isCartReadyForNewMessage(cartState);
 
         // Si no está lista salir
         if ( !this.readyForTransit ){
