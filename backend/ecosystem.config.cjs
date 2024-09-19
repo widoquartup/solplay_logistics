@@ -1,12 +1,12 @@
 module.exports = {
     apps : [{
-      name: "api",
+      name: "backend",
       script: "./dist/index.js",
       env: {
         NODE_ENV: "production",
       },
-      exec_mode: "cluster",
-      instances: "max",
+      exec_mode: "fork",
+      instances: 1,
       watch: false,
       max_memory_restart: "1G",
     }]
