@@ -217,7 +217,7 @@ class GatewayService {
     
     async processAfterAck(ack: Ack): Promise<void> {
         this.processOrderInTransit(ack);
-        console.log(colors.green("ACK, se puede enviar una nueva orden", logClassGetters(ack)));
+        // console.log(colors.green("ACK, se puede enviar una nueva orden", logClassGetters(ack)));
         this.waitingAck = false;
     }
     async processAfterTransitAck(transitAck: TransitAck): Promise<void> {
@@ -398,12 +398,12 @@ class GatewayService {
     }
 
     async processAfterCircuitState(circuitState: CircuitState): Promise<void> {
-        console.log(colors.green("CircuitState2", logClassGetters(circuitState)));
+        // console.log(colors.green("CircuitState2", logClassGetters(circuitState)));
         // this.processNextMessage();
     }
     // Station State change
     async processAfterStationState(stationState: StationState): Promise<void> {
-        console.log(colors.green("StationState", logClassGetters(stationState)));
+        // console.log(colors.green("StationState", logClassGetters(stationState)));
         this.stationService.receivedStationState(stationState);
         // this.processNextMessage();
         
