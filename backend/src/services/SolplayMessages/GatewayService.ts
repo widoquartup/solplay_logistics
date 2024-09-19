@@ -1,6 +1,6 @@
 import TcpClient from './TcpClient';
 import ProcessResultMessage from './ProcessResultMessage';
-// import { MongoDBService, Message } from './MongoDBService';
+
 import colors from 'cli-color';
 import dotenv from 'dotenv';
 import Nack from './models/messages/received/Nack';
@@ -48,7 +48,6 @@ const END = '0x03';
 const CART_PARKING =  process.env.CART_PARKING || 25;
 const GET_MESSAGE_QUEUED_INTERVAL =  (process.env.GET_MESSAGE_QUEUED_INTERVAL || 5000) as number;
 class GatewayService {
-    // private mongoService: MongoDBService;
     private tcpClient: TcpClient;
     private lastMsgId: number;
     private lastStationId: number;
