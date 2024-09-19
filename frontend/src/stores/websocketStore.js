@@ -4,9 +4,12 @@ import { io } from 'socket.io-client';
 import { useStationStore } from './stationsStore' // Importamos el store
 import { useCompletedOrdersStore } from './completedOrdersStore';
 import { useConnectionStore } from './connectionStore';
+import { useMessageQueueStore } from './messageQueueStore';
 
-const VITE_SOCKET_EVENT_STORE_CHANGED = import.meta.env.VITE_SOCKET_EVENT_STORE_CHANGED || 'storeChanged';
+
+const VITE_SOCKET_EVENT_STORE_CHANGED = import.meta.env.VITE_SOCKET_EVENT_STORE_CHANGED || 'store_hanged';
 const VITE_SOCKET_CONNECTION_STATUS = import.meta.env.VITE_SOCKET_CONNECTION_STATUS || 'connection_status';
+const VITE_SOCKET_MESSAGE_QUEUE_STATUS = import.meta.env.VITE_SOCKET_MESSAGE_QUEUE_STATUS || 'message_queue_changed';
 // console.log("VITE_SOCKET_EVENT_STORE_CHANGED", VITE_SOCKET_EVENT_STORE_CHANGED);
 export const useWebSocketStore = defineStore('websocket', {
   state: () => ({
@@ -67,11 +70,22 @@ export const useWebSocketStore = defineStore('websocket', {
         this.gatewayConectionChanged(message)
         return;
       }
+      // recibimos el estado de la conexión con el gateway
+      if (event == VITE_SOCKET_MESSAGE_QUEUE_STATUS ){
+        this.messageQueueChanged(message)
+        return;
+      }
+    },
+    
+    messageQueueChanged(){
+      const messageQueueStore = useMessageQueueStore();
+      messageQueueStore.fetchMessages();
     },
     
     storeChanged() {
       const stationsStore = useStationStore();
       const completedOrdersStore = useCompletedOrdersStore();
+
       stationsStore.getStations();
       completedOrdersStore.fetchCompletedOrders();
       // try {

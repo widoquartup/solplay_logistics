@@ -11,9 +11,10 @@
  *  next_node	                5	        Nodo final del siguiente segmento.
  *  speed_mms	                5	        Velocidad actual en milímetros por segundo.
  *  cross_confirmation_needed	1	        A 1 si espera recibir un mensaje de tipo cross_granted para el nodo end_node. No pasará al segmento siguiente (end_node, next_node) hasta que no lo reciba.
- *  orders	                    164	        Contiene 2 Transit_order (82 bytes cada una). Ver Transit_order en Estructuras.
+ *  orders	                    154	        Contiene 2 Transit_order (82 bytes cada una). Ver Transit_order en Estructuras.
  */
-import { parseData } from '../../../helpers/Helpers';
+import { OrderqueueUpdateSchema } from '@src/app/Resources/Orderqueue/OrderqueueValidations';
+import { getLast2TransitOrders, parseData } from '../../../helpers/Helpers';
 import TransitOrder from './TransitOrder';
 
 export interface CartStateData {
@@ -214,6 +215,14 @@ class CartState {
     set orders(value: string) {
         this._orders = value;
     }
+
+    getTransitOrders(): [TransitOrder|null, TransitOrder|null] {
+        const last2TransitOrders = getLast2TransitOrders(this._orders);
+        if (last2TransitOrders[0] == null || last2TransitOrders[1] == null){
+            return [null, null];
+        }
+        return  [new TransitOrder(last2TransitOrders[0]), new TransitOrder(last2TransitOrders[1])];
+    }
 }
 
 export default CartState;
@@ -223,14 +232,28 @@ export default CartState;
 export class CartStateProcess{
 
     private value: CartState;
-    private transitOrder: TransitOrder;
+    private transitOrder: TransitOrder|null;
+    private transitOrders: [TransitOrder|null,TransitOrder|null];
     constructor(state: CartState){
         this.value = state;
         // me quedo con la transitOrder de la estación 100 porque es la que nos interesa para comprobar si es válido el último estado de estación de carga que hemos recibido
-        this.transitOrder = new TransitOrder(state.orders.substring(0,82));
-        if (parseInt(this.transitOrder.stationId) !== 100 ){
-            this.transitOrder = new TransitOrder(state.orders.substring(82,82));
+        
+
+        // this.transitOrder = new TransitOrder(state.orders.substring(0,82));
+        // if (parseInt(this.transitOrder.stationId) !== 100 ){
+        //     this.transitOrder = new TransitOrder(state.orders.substring(82,82));
+        // }
+
+        this.transitOrders = state.getTransitOrders();
+        if (this.transitOrders[0] !== null && parseInt(this.transitOrders[0].stationId) == 100){
+            this.transitOrder = this.transitOrders[0];
+        }else{
+            this.transitOrder = this.transitOrders[1];
         }
+    }
+
+    getTransitOrders() {
+        return this.transitOrders;
     }
 
 
@@ -247,15 +270,26 @@ export class CartStateProcess{
 
     // comprobar si es la estación 100 
     isStation100():boolean{
+        if (this.transitOrder == null){
+            return false;
+        }
         return parseInt(this.transitOrder.stationId) == 100;
     }
 
     isTypeLoad(){
+        if (this.transitOrder == null){
+            return false;
+        }
+
         return (parseInt(this.transitOrder.type) === 1);
     }
 
 
     isUseAndTransitPhaseOk():boolean{
+        if (this.transitOrder == null){
+            return false;
+        }
+
         if (parseInt(this.transitOrder.use) == 1){
             return true;
         }
@@ -268,6 +302,54 @@ export class CartStateProcess{
             return true;
         }
         return false;
+    }
+    
+    isCartReadyForNewMessage():boolean{
+        // comprobar las 2 ordenes que vienen en CARTSTATE ANTES DE ENVIAR
+        
+        // use: 
+        // unused: 0
+        // previouse: 1
+        // current: 2
+        // next:3 
+        
+        // 0 y 0 true
+        // 0 y 1 true
+        // 1 y 0 true
+        // 1 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+        // 2 y 1 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+        // 2 y 3 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+        // 3 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+        
+        // 0 y 2 true
+        // 2 y 0 true
+        
+        // 3 y 1 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
+        // 1 y 3 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
+        
+        // 3 y 0 true
+        // 0 y 3 true
+
+        
+        for( let index1:number = 0; index1<2;index1++){
+            const order1: TransitOrder|null = this.transitOrders[index1];
+            const order2: TransitOrder|null = this.transitOrders[(index1 == 0) ? 1: 0];
+            if (order1 == null || order2 == null  ){
+                return false;
+            }
+
+            if ( parseInt(order1.use) == 1 && parseInt(order1.phase) !== 3 ){
+                return false;
+            }
+            if ( parseInt(order1.use) == 2 && parseInt(order1.phase) !== 3){
+                return false;
+            }
+            if ( parseInt(order1.use) == 3 && parseInt(order1.phase) !== 3){
+                return false;
+            }
+        }
+
+        return true;
     }
     
 

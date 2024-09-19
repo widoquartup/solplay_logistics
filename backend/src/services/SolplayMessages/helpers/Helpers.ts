@@ -65,6 +65,7 @@ export function parseData(lengths: LengthsObject, data: string): unknown {
  */
 export function canSendTransit(cart_status: number): boolean {
     const koStatus = [
+        'none',
         'cart_error',
         'hook_error',
         'warning',
@@ -262,3 +263,22 @@ export const calculateOrderReadyDate = (): Date =>{
 export const isReadyToDelivery = (earliestDeliveryDate: Date, delivery_date: Date): boolean => {
     return delivery_date <= earliestDeliveryDate ;
 };
+
+export const getLast2TransitOrders = (input: string): [string|null, string|null] => {
+    // Asegurarse de que el string tiene al menos 154 caracteres
+    if (input.length < 154) {
+        return [null,null];
+    }
+  
+    // Calcular el punto de inicio para los últimos 154 caracteres
+    const startIndex = input.length - 154;
+  
+    // Extraer los últimos 164 caracteres
+    const last164 = input.slice(startIndex);
+  
+    // Dividir los últimos 164 caracteres en dos partes de 82 caracteres cada una
+    const firstPart = last164.slice(0, 77);
+    const secondPart = last164.slice(77);
+  
+    return [firstPart, secondPart];
+  };

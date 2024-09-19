@@ -70,6 +70,12 @@ class StationService {
         }
     }
 
+    isCartReadyForNewMessage(cartState: CartState){
+        const cartStateProcess = new CartStateProcess(cartState);
+        return cartStateProcess.isCartReadyForNewMessage();
+    }
+
+
     processLastStationState(){
         // const lugar = stationState.stationType == "1" ? 'Derecha' : 'Izquierda';
         const stationState: (StationState | null) = (this.lastStationState[0] !== null ) ? this.lastStationState[0] : this.lastStationState[1];
@@ -108,7 +114,7 @@ class StationService {
                     const updateOrderInStationResult = await this.almacenService.updateOrderInStation(parseInt(stationState.stationId), parseInt(stationState.stationType), pendingStorageRow.order, true);
                     if (updateOrderInStationResult){
                         pendingStorageRow.pending = false;
-                        const resultsPendingStorage = await this.pendingStorageService.update(pendingStorageRow._id, pendingStorageRow);
+                        const resultsPendingStorage = await this.pendingStorageService.update(pendingStorageRow._id.toString(), pendingStorageRow);
                     }
 
 
@@ -153,9 +159,7 @@ class StationService {
                 if (results.collection.length>0){
                     const row: PendingStorageType = results.collection[0];
                     row.pending = false;
-                    this.pendingStorageService.update(row._id, row);
-                    // const resultUpdateAlmacen = this.almacenService.update(row._id, row);
-                    // console.log(`Orden para marcar como descargada ${lugar}`, results.collection[0].order);
+                    this.pendingStorageService.update(row._id.toString(), row);
                 }else{
                     console.log(`No tengo cargas pendientes en la estación ${lugar}!!!`);
                 }

@@ -32,7 +32,7 @@ class WinstonLogger implements LoggerInterface {
         format.json() // Formato JSON
       ),
       transports: [
-        new transports.Console(), // Log en consola
+        // new transports.Console(), // Log en consola
         dailyRotateFileTransportInfo,
         dailyRotateFileTransportError
       ],

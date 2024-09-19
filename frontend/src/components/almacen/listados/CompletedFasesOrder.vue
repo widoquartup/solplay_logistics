@@ -10,7 +10,7 @@
     </v-text-field>
     <v-data-table :headers="headers" :items="filteredItems" class="elevation-1">
       <template #[`item.delivery_date`]="{ item }">
-        {{ formatDate(item.delivery_date) }}
+        {{ formatDateFromString(item.delivery_date) }}
       </template>
     </v-data-table>
   </div>
@@ -19,7 +19,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCompletedOrdersStore } from '@/stores/completedOrdersStore';
-import { formatDate, sortAndNumberArray } from '@/utils/Helpers';
+import { formatDateFromString, sortAndNumberArray } from '@/utils/Helpers';
 
 const completedOrdersStore = useCompletedOrdersStore();
 const search = ref('');
@@ -38,7 +38,7 @@ const filteredItems = computed(() => {
   if (search.value) {
     return sortAndNumberArray(completedOrdersStore.getCompletedOrders().filter(item => (
       item.order_number.toString().includes(search.value) ||
-      formatDate(item.delivery_date).includes(search.value) ||
+      formatDateFromString(item.delivery_date).includes(search.value) ||
       item.detail.toLowerCase().includes(search.value.toLowerCase())
     )));
   }

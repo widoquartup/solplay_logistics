@@ -70,5 +70,11 @@
       "value": 1024,
       "hex_value": "0x0400",
       "description": "El carro está indisponible temporalmente. Desencadenado por un comando de ?idle_processing? o equivalente desde el gateway."
+    },
+    {
+      "name": "shutdown_ready",
+      "value": 2048,
+      "hex_value": "0x0800",
+      "description": "Durante el apagado del circuito, el gateway envía una orden a todos los carros y espera a que tengan este estado antes de dar conformidad al apagado."
     }
   ]

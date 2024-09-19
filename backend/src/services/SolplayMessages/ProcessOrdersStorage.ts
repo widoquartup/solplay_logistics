@@ -37,9 +37,9 @@ class ProcessOrdersStorage {
             const resultOrder = await this.almacenRepository.findWithMongo(filters);
             if (resultOrder.length>0) {
                 const almacen = resultOrder[0];
-                almacen.order = order;
-                almacen.loaded = loaded;
-                const resultOrderUpdate = await this.almacenRepository.update(almacen._id, almacen);
+                // almacen.order = order;
+                // almacen.loaded = loaded;
+                const resultOrderUpdate = await this.almacenRepository.updateStation(almacen, {order, loaded});
                 return resultOrderUpdate;
             }
         } catch (error) {
@@ -60,7 +60,7 @@ class ProcessOrdersStorage {
                 const almacen = resultOrder[0];
                 almacen.order = null;
                 almacen.loaded = false;
-                const resultOrderUpdate = await this.almacenRepository.update(almacen._id, almacen);
+                const resultOrderUpdate = await this.almacenRepository.updateStation(almacen, {order: null, loaded: false});
                 return resultOrderUpdate;
             }
         } catch (error) {

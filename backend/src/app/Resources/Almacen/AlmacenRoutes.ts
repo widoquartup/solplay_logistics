@@ -39,6 +39,7 @@ const transitMiddlewares: RequestHandler[] = [auth];
 router.get('/', indexMiddlewares, almacenController.index);
 // router.get('/:almacen_id', showMiddlewares, almacenController.show);
 router.get('/calc/:value', [], almacenController.calc);
+router.get('/cartstate/:value', [], almacenController.showCartStateMessage);
 router.get('/reset-gateway', indexMiddlewares, almacenController.resetGateway);
 router.get('/transit/cancel', [], almacenController.cancelTransit);
 router.post('/', storeMiddlewares, almacenController.store);
@@ -46,6 +47,7 @@ router.put('/:almacen_id', updateMiddlewares, almacenController.update);
 router.delete('/:almacen_id', deleteMiddlewares, almacenController.delete);
 router.patch('/:almacen_id/softDelete', softDeleteMiddlewares, almacenController.softDelete);
 router.post('/transport', transportMiddlewares, almacenController.transport);
+router.post('/mover-orden', transportMiddlewares, almacenController.changeOrderInStorage);
 router.post('/unload', unloadMiddlewares, almacenController.unload);
 router.post('/gateway/tcp-status', indexMiddlewares, almacenController.tcpStatus);
 // Exportar el router

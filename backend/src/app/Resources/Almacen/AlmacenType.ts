@@ -1,10 +1,10 @@
 // Definición del tipo Almacen
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Order } from '../PendingStorage/PendingStorageType';
 
 
 export interface AlmacenType extends Document {
-    _id: string,
+    _id:Types.ObjectId;
     station_id: number,
     station_type: number,
     level: number,

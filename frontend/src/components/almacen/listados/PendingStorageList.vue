@@ -10,7 +10,7 @@
     </v-text-field>
     <v-data-table :headers="headers" :items="filteredItems" class="elevation-1">
       <template #[`item.order.fecha_entrega`]="{ item }">
-        {{ formatDate(item.order.fecha_entrega) }}
+        {{ formatDateFromString(item.order.fecha_entrega) }}
       </template>
       <template #[`item.station_type`]="{ item }">
         {{ (item.station_type == 1 ? "Izquierda" : "Derecha") }}
@@ -22,7 +22,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { usePendingStoragesStore } from '@/stores/pendingStoragesStore';
-import { formatDate, sortAndNumberArray } from '@/utils/Helpers';
+import { formatDateFromString, sortAndNumberArray } from '@/utils/Helpers';
 const pendingStoragesStore = usePendingStoragesStore();
 const search = ref('');
 
@@ -40,7 +40,7 @@ const filteredItems = computed(() => {
   if (search.value) {
     return sortAndNumberArray(pendingStoragesStore.storages.filter(item => (
       item.order_number.toString().includes(search.value) ||
-      formatDate(item.delivery_date).includes(search.value) ||
+      formatDateFromString(item.delivery_date).includes(search.value) ||
       item.detail.toLowerCase().includes(search.value.toLowerCase())
     )));
   }

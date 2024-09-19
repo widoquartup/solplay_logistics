@@ -9,6 +9,8 @@ import { TransportParameterType } from './AlmacenTypes';
 import { context } from '@base/context';
 import GestionAlmacenService from '@src/services/SolplayMessages/services/GestionAlmacenService';
 import { getCartBitValuesFromDecimalStatus } from '@src/services/SolplayMessages/helpers/Helpers';
+import CartState, { CartStateProcess } from '@src/services/SolplayMessages/models/messages/received/CartState';
+import StationService from '@src/services/SolplayMessages/services/StationService';
 // import colors from 'cli-color';
 
 class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
@@ -18,6 +20,7 @@ class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
         this.unload = this.unload.bind(this);
         this.cancelTransit = this.cancelTransit.bind(this);
         this.resetGateway = this.resetGateway.bind(this);
+        this.changeOrderInStorage = this.changeOrderInStorage.bind(this);
     }
 
     async store(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -52,6 +55,19 @@ class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
         next();
         return;
     }
+    async changeOrderInStorage(req: Request, res: Response, next: NextFunction) {
+        const result = await this.service.changeOrderInStorage( req.body.from as TransportParameterType, req.body.to as TransportParameterType);
+        res.locals.response = result;
+        res.status(200);
+        // res.status(result.code);
+        
+        next();
+        return;
+    }
+
+    
+
+
     async unload(req: Request, res: Response, next: NextFunction) {
         const result = await this.service.unload( req.body.to as TransportParameterType);
         res.locals.response = result;
@@ -94,6 +110,25 @@ class AlmacenController extends ControllerBase<AlmacenType, AlmacenService> {
         const keys = Object.keys(req.params);
         // const entity = await this.service.show(req.params[keys[0]]);
         res.locals.response = { data: getCartBitValuesFromDecimalStatus(parseInt(req.params[keys[0]])) };
+        res.status(200);
+        next();
+        return ;
+    }
+    async showCartStateMessage(req: Request, res: Response, next: NextFunction) {
+        res.locals.params = req.params;
+        const keys = Object.keys(req.params);
+        const message = req.params[keys[0]];
+        const cartState = new CartState(message);
+        const cartStateProcess = new CartStateProcess(cartState);
+        const result = {
+            cartState: cartState,
+            bitStateValues: getCartBitValuesFromDecimalStatus(parseInt(cartState.cartStatus)),
+            isCartReadyForNewMessage: cartStateProcess.isCartReadyForNewMessage(),
+            transitOrders: cartStateProcess.getTransitOrders()
+        };
+        
+        // const entity = await this.service.show(req.params[keys[0]]);
+        res.locals.response = result;
         res.status(200);
         next();
         return ;

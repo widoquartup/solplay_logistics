@@ -13,12 +13,12 @@
         {{ item.preferent_order ? item.preferent_order : 0 }}
       </template>
       <template #[`item.order.fecha_entrega`]="{ item }">
-        {{ formatDate(item.order.fecha_entrega) }}
+        {{ formatDateFromString(item.order.fecha_entrega) }}
       </template>
       <template #[`item.station_id`]="{ item }">
-        <v-btn size="small" @click="scrollToItem(item)" class="station-btn" :class="{ loaded: item.loaded }">
+        <v-chip @click="scrollToItem(item)" class="station-btn" :class="{ loaded: item.loaded }">
           {{ formatStationId(item.station_id) }}
-        </v-btn>
+        </v-chip>
       </template>
       <template #[`item.station_type`]="{ item }">
           {{ (item.station_type==3 ? "Der" : "Izq") }}
@@ -39,7 +39,7 @@
 import { ref, computed, defineEmits } from 'vue'
 import { LEVEL_ORDER_POSITIONS, useStationStore } from '@/stores/stationsStore' // Importamos el store
 import moment from 'moment'
-import { formatDate, formatStationId } from '@/utils/Helpers';
+import { formatDateFromString, formatStationId } from '@/utils/Helpers';
 const stationStore = useStationStore();
 
 const emit = defineEmits(['handleDelivery']);
@@ -64,7 +64,7 @@ const filteredItems = computed(() => {
   if (search.value) {
     return items.filter(item => (
       item.order.number.toString().includes(search.value) ||
-      formatDate(item.order.fecha_entrega).includes(search.value) ||
+      formatDateFromString(item.order.fecha_entrega).includes(search.value) ||
       item.order.detalle.toLowerCase().includes(search.value.toLowerCase())
     ));
   }

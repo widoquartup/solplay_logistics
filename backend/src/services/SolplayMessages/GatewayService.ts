@@ -9,7 +9,7 @@ import TransitAck from './models/messages/received/TransitAck';
 import CircuitState from './models/messages/received/CircuitState';
 import CartState, { CartStateProcess } from './models/messages/received/CartState';
 import StationState from './models/messages/received/StationState';
-import { canSendTransit,  getCartBitValuesFromDecimalStatus,  getMessageFromQueueForSend, getTransit, logClassGetters, sleep} from './helpers/Helpers';
+import { canSendTransit,  getCartBitValuesFromDecimalStatus,  getLast2TransitOrders,  getMessageFromQueueForSend, getTransit, logClassGetters, sleep} from './helpers/Helpers';
 import StationService from './services/StationService';
 // import { PendingStorageRepository } from '@src/app/Resources/Almacen/PendingStorage/PendingStorageRepository';
 import { MessageService } from '@src/app/Resources/Message/MessageService';
@@ -23,6 +23,8 @@ import { Order } from '@src/app/Resources/PendingStorage/PendingStorageType';
 import ProcessOrdersStorage from './ProcessOrdersStorage';
 import GestionAlmacenService from './services/GestionAlmacenService';
 import WinstonLogger from '../Logger/Services/WinstonLogger';
+import { unknown } from 'zod';
+import { log } from 'console';
 // import OrderQueueProcessService from './OrderQueueProcessService';
 // import { setTokenSourceMapRange } from 'typescript';
 
@@ -43,7 +45,6 @@ dotenv.config();
 
 const START = '0x02';
 const END = '0x03';
-const processMessage = new ProcessResultMessage();
 const CART_PARKING =  process.env.CART_PARKING || 25;
 const GET_MESSAGE_QUEUED_INTERVAL =  (process.env.GET_MESSAGE_QUEUED_INTERVAL || 5000) as number;
 class GatewayService {
@@ -66,6 +67,9 @@ class GatewayService {
     private readyToLoadInStation100: boolean;
     private tcpConnectionAllowed: boolean = true;
     private logger: WinstonLogger = new WinstonLogger();
+    private processResultMessage:ProcessResultMessage = new ProcessResultMessage();
+    private lastMsgIdSended: number;
+
     constructor() {
         this.readyToLoadInStation100 = false;
         this.processOrderStorage = new ProcessOrdersStorage();
@@ -82,6 +86,7 @@ class GatewayService {
         this.timeoutId = this.setIntervalForGetMessageQueued();
         this.init();
         this.gestionAlmacenService = new GestionAlmacenService(this);
+        this.lastMsgIdSended = 0;
     }
     
     async init(){
@@ -167,22 +172,23 @@ class GatewayService {
         const stringData = data.toString('utf-8');
 
         if (stringData == "DISCONNECTED"){
-            this.gestionAlmacenService.sendConnectionStatus({connected:false});
+            this.gestionAlmacenService.sendConnectionStatusToFrontend({connected:false});
             return;
         }
 
-        this.gestionAlmacenService.sendConnectionStatus({connected:true});
+        this.gestionAlmacenService.sendConnectionStatusToFrontend({connected:true});
 
         // Pasar la el string del buffer de entrada a un array de mensajes
-        const messages = processMessage.processMessages(stringData);
+        const messages = this.processResultMessage.processMessages(stringData);
 
         // procesar los mensajes
         messages.forEach( (message: string) => {
-            this.logger.info('IN>>>'+message+'<<<');
-            const objectReceived = processMessage.process(message);
-    
-                if (objectReceived instanceof Nack) {
-                    // //-->console.log("NACK:", objectReceived);
+            this.logger.info('IN>>>'+message+'<<<' );
+            // console.log("LARGO MENSAJE = ",message.length);s
+            const objectReceived = this.processResultMessage.process(message);
+            
+            if (objectReceived instanceof Nack) {
+                // //-->console.log("NACK:", objectReceived);
                     this.processAfterNack(objectReceived);
                 } else if (objectReceived instanceof Ack) {
                     // //-->console.log("ACK:", objectReceived);
@@ -214,15 +220,10 @@ class GatewayService {
         this.processOrderInTransit(ack);
         console.log(colors.green("ACK, se puede enviar una nueva orden", logClassGetters(ack)));
         this.waitingAck = false;
-        // await sleep(2);
-        this.processNextMessage();
     }
     async processAfterTransitAck(transitAck: TransitAck): Promise<void> {
         // this.processOrderInTransit(transitAck);
         console.log(colors.green("TransitAck, se puede enviar una nueva orden", logClassGetters(transitAck)));
-        // await sleep(2);
-        this.waitingAck = false;
-        // this.processNextMessage();
     }
 
     // si recibimos un Nack, procesamos la orderInTransit y messageQueue
@@ -271,18 +272,28 @@ class GatewayService {
     }
 
     async processAfterCartState(cartState: CartState): Promise<void> {
-        console.log("processAfterCartState", cartState);
+        // console.log("processAfterCartState", cartState);
         this.lastCartStatus = parseInt(cartState.cartStatus);
-        // comprueba si podemos seguir con los mensajes pendientes
 
-        // probamos la consulta a este método dentro del processNextMessage porque están saliendo mensajes qeu no deberían
-        this.readyForTransit = canSendTransit(this.lastCartStatus);
-        // this.logger.info("CART STATUS>>" + JSON.stringify(getCartBitValuesFromDecimalStatus(this.lastCartStatus)));
-        // comprueba si puede procesar los mensajes desde el gateway que indican que hay carga.
-        if (this.readyForTransit){
-            this.stationService.tryProcessLoadOnStation100(cartState);
-            this.processNextMessage();
+        // Comprueba si el carro está listo para nuevos mensajes
+        this.readyForTransit = canSendTransit(this.lastCartStatus) && this.stationService.isCartReadyForNewMessage(cartState);
+
+        // Si no está lista salir
+        if ( !this.readyForTransit ){
+            return;
         }
+        this.logger.info("-------El carro acepta nuevos mensajes-------");
+        // comprueba si podemos seguir con los mensajes pendientes
+        const lastAckMoment = this.processResultMessage.getLastAckMoment();
+        const lastCartStatusMoment = this.processResultMessage.getLastCartStatusMoment();
+
+        // Si el Ack es posterior al Cartstate salir
+        if ( !(lastAckMoment !== null && lastCartStatusMoment!==null && lastAckMoment < lastCartStatusMoment )) {
+            return;            
+        }    
+
+        this.stationService.tryProcessLoadOnStation100(cartState);
+        await this.processNextMessage();
     }
 
     async processNextMessage(){
@@ -295,13 +306,11 @@ class GatewayService {
         this.showStatus();
         // parar el timeout
         clearTimeout(this.timeoutId);
-        // if (!this.waitingAck && (this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) ){
-        // if ((this.readyForTransit ||   this.lastCartStatus== 200 && ( this.lastStationId == 102 || this.hasTransitToParkingPending )) ){
-        
+
         // Consultamos por el último estado para saber si podemos hacer tránsitos
-        const canIsendTransit:boolean = canSendTransit(this.lastCartStatus);
+        // const canIsendTransit:boolean = canSendTransit(this.lastCartStatus);
         if (this.readyForTransit){
-            console.log(`lastCartStatus=${this.lastCartStatus}  canIsendTransit`, canIsendTransit);
+            // console.log(`lastCartStatus=${this.lastCartStatus}  canIsendTransit`, canIsendTransit);
             const nextMessage = await this.processMessageQueue.getNextMessagePending();
 
             // No hay mensajes en cola y la última estación es la de entrega, enviar el carro a la estación 25
@@ -365,9 +374,11 @@ class GatewayService {
                     if (!(sendMessage instanceof CancelTransit)){
                         this.lastStationId = sendMessage.getStationId();
                     }
+
                     if (nextMessage.fromPending){
                         console.log("--> FROM", nextMessage._id, nextMessage.fromPending);
                         nextMessage.fromPending = false;
+                    
                     }else{
                         nextMessage.toPending = false;
                         console.log("--> TO", nextMessage._id, nextMessage.toPending);
@@ -375,8 +386,10 @@ class GatewayService {
                     // console.log("GUARDAR", nextMessage._id, nextMessage.fromPending, nextMessage.toPending);
                     const processMessageQueueResult = await this.processMessageQueue.update(nextMessage);
                     // console.log("nextMessageResult", processMessageQueueResult);
-
-                    await this.send(sendMessage.getData(), sendMessage.getType(), true);
+                    if (this.lastMsgIdSended !== msgId){
+                        await this.send(sendMessage.getData(), sendMessage.getType(), true);
+                        this.lastMsgIdSended = msgId;
+                    }   
                 } catch (error) {
                     //-->console.log("Error enviando o guardando el mensaje");
                 }
@@ -387,13 +400,13 @@ class GatewayService {
 
     async processAfterCircuitState(circuitState: CircuitState): Promise<void> {
         console.log(colors.green("CircuitState2", logClassGetters(circuitState)));
-        this.processNextMessage();
+        // this.processNextMessage();
     }
     // Station State change
     async processAfterStationState(stationState: StationState): Promise<void> {
         console.log(colors.green("StationState", logClassGetters(stationState)));
         this.stationService.receivedStationState(stationState);
-        this.processNextMessage();
+        // this.processNextMessage();
         
     }
 

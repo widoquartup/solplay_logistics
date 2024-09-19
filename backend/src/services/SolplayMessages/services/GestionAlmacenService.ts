@@ -23,6 +23,7 @@ import { KafkaMessage } from '@src/services/Kafka/KafkaConsumer';
 dotenv.config();
 const SOCKET_EVENT_STORE_CHANGED = process.env.SOCKET_EVENT_STORE_CHANGED || 'storeChanged';
 const SOCKET_CONNECTION_STATUS = process.env.SOCKET_CONNECTION_STATUS || 'connection_status';
+const SOCKET_MESSAGE_QUEUE_STATUS = process.env.SOCKET_MESSAGE_QUEUE_STATUS || 'message_queue_changed';
 class GestionAlmacenService {
     
     private almacenService: AlmacenService;
@@ -38,14 +39,17 @@ class GestionAlmacenService {
         this.completedFasesOrderService = new CompletedFasesOrderService(this.completedFasesOrderRepository);
     }
 
-    async sendConnectionStatus (data: object|null) {
-        this.sendMessageToGatewayApp(data, SOCKET_CONNECTION_STATUS);
+    async sendConnectionStatusToFrontend (data: object|null) {
+        this.sendMessageToFrontend(data, SOCKET_CONNECTION_STATUS);
     }
-    async sendUpdateStorageMessageToGatewayApp (data: object|null) {
-        this.sendMessageToGatewayApp(data, SOCKET_EVENT_STORE_CHANGED);
+    async sendUpdateMessageQueueStatusToFrontend (data: object|null) {
+        this.sendMessageToFrontend(data, SOCKET_MESSAGE_QUEUE_STATUS);
+    }
+    async sendUpdateStorageMessageToFrontend (data: object|null) {
+        this.sendMessageToFrontend(data, SOCKET_EVENT_STORE_CHANGED);
     }
     // enviar mensaje por websocket a la app almacén y guardar la orden en 
-    async sendMessageToGatewayApp (data: object|null, messageType: string = SOCKET_EVENT_STORE_CHANGED) {
+    async sendMessageToFrontend (data: object|null, messageType: string = SOCKET_EVENT_STORE_CHANGED) {
         // console.log(data);
         SocketHandler.emitMessage(messageType, JSON.stringify(data));
     }
@@ -125,7 +129,10 @@ class GestionAlmacenService {
             }
             almacenResult[bulto-1].order = order;
             almacenResult[bulto-1].order!.bulto = bulto;
-            const updateResult = await this.almacenService.update(almacenResult[bulto-1]._id, almacenResult[bulto-1]);
+            const orderModified = order;
+            orderModified.bulto = bulto;
+            // TODO: HAY QUE CAMBIARLO POR EL update, esto es un apaño porque hay un error en el update y no he podido solucionar hasta ahora
+            const updateResult = await this.almacenService.updateStation(almacenResult[bulto-1], {order: orderModified});
             if (!updateResult){
                 throw Error(`Error al guardar la posición ${almacenResult[bulto-1].station_id} / ${almacenResult[bulto-1].station_type} / ${almacenResult[bulto-1].level}` );
             }
@@ -155,7 +162,7 @@ class GestionAlmacenService {
               isDeleted: false
             } as CompletedFasesOrderType);
             if (result){
-              this.sendMessageToGatewayApp(result, SOCKET_EVENT_STORE_CHANGED);
+              this.sendMessageToFrontend(result, SOCKET_EVENT_STORE_CHANGED);
               
             }
             console.log("Registro creado ", result);

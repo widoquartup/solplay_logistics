@@ -37,6 +37,16 @@ class TransportService extends BaseService {
       throw error;
     }
   }
+  async registerMoveOrder(from, to) {
+    try {
+      const data = { from: getStationData(from), to: getStationData(to) };
+      const response = await this.doPost(`/almacen/mover-orden`, data );
+      return response.data;
+    } catch (error) {
+      console.error('Error registering transport:', error);
+      throw error;
+    }
+  }
   async unload( to) {
     try {
       const data = { to: getStationData(to) };

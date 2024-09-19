@@ -36,7 +36,7 @@
     </v-alert>
   </v-dialog>
 
-  <Visualizador @handleDelivery="handleDelivery" @simulateCarga="simulateCarga" @cancelTransit="cancelTransit" @resetApiGateway="resetApiGateway" />
+  <Visualizador :isTransport="isTransport" @changeTransportFunction="handleChangeTransportFunction" @handleDelivery="handleDelivery" @simulateCarga="simulateCarga" @cancelTransit="cancelTransit" @resetApiGateway="resetApiGateway" />
 
   <!-- <v-textarea v-model="jsonOutput" readonly rows="10" class="mt-4"></v-textarea> -->
   <v-snackbar v-model="snackbar" :timeout="3000">
@@ -63,7 +63,7 @@ import transportService from '../../services/AlmacenService'
 import { LEVEL_ORDER_POSITIONS, useStationStore, MAX_STATIONS_STORE } from '../../stores/stationsStore' // Importamos el store
 import { useWebSocketStore } from '@/stores/websocketStore';
 import Visualizador from './Visualizador.vue';
-import ConnectionStatus from '../ConnectionStatus.vue';
+import ConnectionStatus from './ConnectionStatus.vue';
 
 
 const dialog = ref(false)
@@ -85,7 +85,12 @@ const selectedOrder = ref(null)
 const transitOrder = ref(null)
 const isEntregaTransition = ref(false)
 
+const isTransport = ref(true);
+
 // Salida JSON computada        
+function handleChangeTransportFunction(){
+  isTransport.value = !isTransport.value;
+}
 
 
 // const jsonOutput = computed(() => JSON.stringify(stationStore.stations, null, 2))
@@ -287,8 +292,13 @@ function handleTransportToStation(station, indexPosition) {
   const from = { station: firstClick.value.station, position: firstClick.value.position }
   const to = { station, position: LEVEL_ORDER_POSITIONS[indexPosition] }
   clearOriginPosition()
-  registerTransport(from, to)
-  showTransportInfo(`Transporte registrado: desde ${from.station}:${from.position} hasta ${to.station}:${to.position}`)
+  if (isTransport.value){
+    registerTransport(from, to)
+    showTransportInfo(`Transporte registrado: desde ${from.station}:${from.position} hasta ${to.station}:${to.position}`)
+  }else{
+    registerMoveOrder(from, to)
+    showTransportInfo(`Moviendo una orden en la base de datos: desde ${from.station}:${from.position} hasta ${to.station}:${to.position}`)
+  }
   resetFirstClick()
 }
 
@@ -349,6 +359,21 @@ async function registerTransport(from, to) {
     const response = await transportService.registerTransport(from, to)
     console.log("Respuesta OK:", response)
     showTransportInfo('Se ha enviado la información al carro con éxito.')
+    return true
+  } catch (error) {
+    console.error("Error al registrar el transporte:", error)
+    showSnackbar('Error al registrar el transporte. Por favor, inténtelo de nuevo.')
+    return false
+  }
+}
+
+// Registra un transporte en el servicio
+async function registerMoveOrder(from, to) {
+  console.log("Llamando a API con valores:", from, to)
+  try {
+    const response = await transportService.registerMoveOrder(from, to)
+    console.log("Respuesta OK:", response)
+    showTransportInfo('Se ha movido la orden en la BBDD')
     return true
   } catch (error) {
     console.error("Error al registrar el transporte:", error)

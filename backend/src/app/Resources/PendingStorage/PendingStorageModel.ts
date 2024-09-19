@@ -19,6 +19,6 @@ const pendingStorageSchema = new Schema({
 pendingStorageSchema.post('findOneAndUpdate', async function(data: PendingStorageType) {
   // enviar mensaje por websocket indicando que hay cambios de stock
   // console.log(data._update["$set"]);
-  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToGatewayApp(data);
+  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToFrontend(data);
 });
 export const PendingStorageModel = mongoose.model<PendingStorageType & Document>('PendingStorage', pendingStorageSchema, "pending_storages");

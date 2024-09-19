@@ -10,9 +10,18 @@ class ProcessResultMessage {
     private _isTransistAck!: boolean;
     private _isAck!: boolean;
     private _isNack!: boolean;
+    private lastAckMoment: Date|null;
+    private lastCartStatusMoment: Date|null;
+    private lastNackMoment: Date|null;
 
     constructor() {
         this.orderType = -1;
+        this._isTransistAck = false;
+        this._isAck = false;
+        this._isNack = false;
+        this.lastAckMoment = null;
+        this.lastCartStatusMoment = null;
+        this.lastNackMoment = null;
         this.init();
     }
 
@@ -20,6 +29,9 @@ class ProcessResultMessage {
         this._isTransistAck = false;
         this._isAck = false;
         this._isNack = false;
+        this.lastAckMoment = null;
+        this.lastCartStatusMoment = null;
+        this.lastNackMoment = null;
     }
 
     processMessages(data:string):string[]{
@@ -42,15 +54,18 @@ class ProcessResultMessage {
 
         if (orderType === 101) {
             this._isAck = true;
+            this.lastAckMoment = new Date();
             return this.processAck(stringData);
         }
 
         if (orderType === 102) {
+            this.lastNackMoment = new Date();
             this._isNack = true;
             return this.processNack(stringData);
         }
 
         if (orderType === 200) {
+            this.lastCartStatusMoment = new Date();
             return this.processCartState(stringData);
         }
 
@@ -63,6 +78,17 @@ class ProcessResultMessage {
         }
 
         return { message: stringData };
+    }
+
+    public getLastNackMoment(): Date | null{
+        return this.lastNackMoment;
+    }
+
+    public getLastAckMoment(): Date | null{
+        return this.lastAckMoment;
+    }
+    public getLastCartStatusMoment(): Date | null{
+        return this.lastCartStatusMoment;
     }
 
     private processAck(data: string): Ack {
@@ -102,6 +128,11 @@ class ProcessResultMessage {
     }
 
     extractMessages (input: string): string[] {
+        // Verificar si la cadena contiene STX y ETX
+        if (!input.includes('\x02') || !input.includes('\x03')) {
+            return [];
+        }
+
         // Expresión regular para capturar texto entre STX (0x02) y ETX (0x03)
         // eslint-disable-next-line no-control-regex
         const regex = /\x02(.*?)\x03/g;

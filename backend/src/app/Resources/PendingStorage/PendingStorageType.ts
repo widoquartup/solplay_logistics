@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 
 // Definición de la interfaz Order
@@ -14,7 +14,7 @@ export interface Order {
 
 // Definición del tipo PendingStorage
 export interface PendingStorageType extends Document {
-    _id: string;
+    _id:Types.ObjectId;
     codigo_barras: string;
     station_id: number;
     station_type: number;

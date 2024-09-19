@@ -22,6 +22,6 @@ const completedFasesOrderSchema = new Schema({
 completedFasesOrderSchema.post('findOneAndUpdate', async function(data: CompletedFasesOrderType) {
   // enviar mensaje por websocket indicando que hay cambios de stock
   // console.log(data._update["$set"]);
-  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToGatewayApp(data);
+  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToFrontend(data);
 });
 export const CompletedFasesOrderModel = mongoose.model<CompletedFasesOrderType & Document>('CompletedFasesOrder', completedFasesOrderSchema, 'completed_fases_orders');

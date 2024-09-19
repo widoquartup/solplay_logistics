@@ -5,7 +5,6 @@ import { MessageQueueRepository } from './MessageQueueRepository';
 import { MessageQueueModel } from './MessageQueueModel';
 import { MessageQueueType } from './MessageQueueType';
 import { Request, Response, NextFunction } from 'express';
-import { SortType } from '@base/Bases/RepositoryInterface';
 
 class MessageQueueController extends ControllerBase<MessageQueueType, MessageQueueService> {
     constructor(service: MessageQueueService) {
@@ -17,10 +16,10 @@ class MessageQueueController extends ControllerBase<MessageQueueType, MessageQue
         try {
 
             const query = {
-                $expr: {
-                    "$or": [{ "fromPending": true }, { "toPending": true }]
-                }
+                "$or": [{ "fromPending": true }, { "toPending": true }]
             };
+                // $expr: {
+                // }
             res.locals.response = await this.service.findWithMongo(query, { _id: -1 });
             next();
         } catch (error) {

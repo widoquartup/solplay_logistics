@@ -31,7 +31,10 @@ almacenSchema.index({ station_id: 1, station_type: 1, level: 1 }, { unique: true
 almacenSchema.post('findOneAndUpdate', async function(data: AlmacenType) {
   // enviar mensaje por websocket indicando que hay cambios de stock
   // console.log(data._update["$set"]);
-  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToGatewayApp(data.order);
+  if (data == null){
+    return;
+  }
+  await new GestionAlmacenService(context.message).sendUpdateStorageMessageToFrontend(data.order);
 });
 
 export const AlmacenModel = mongoose.model<AlmacenType & Document>('Almacen', almacenSchema, 'storages');

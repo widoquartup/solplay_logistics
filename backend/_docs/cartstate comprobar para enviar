@@ -1,0 +1,46 @@
+NO ENVIAR
+
+cart_error
+hook_error
+warning
+paused
+manual_mode
+maintenance
+house_keeping
+
+
+
+loaded comprobar para no enviar otra de load
+
+y no enviar a descargar si no está loaded
+
+
+
+
+
+
+
+comprobar las 2 ordenes que vienen en CARTSTATE ANTES DE ENVIAR
+
+transit_order
+unused: 0
+previouse: 1
+current: 2
+next:3 
+
+0 y 0 true
+0 y 1 true
+1 y 0 true
+1 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+2 y 1 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+2 y 3 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+3 y 2 comprobar si la orden que tiene el current (2) phase = 3 (transit_done)
+
+0 y 2 true
+2 y 0 true
+
+3 y 1 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
+1 y 3 comprobar si la orden que tiene el previous (1) phase = 3 (transit_done)
+
+3 y 0 true
+0 y 3 true

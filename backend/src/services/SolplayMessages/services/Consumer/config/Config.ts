@@ -45,7 +45,7 @@ class CompletedFasesOrder{
           //
           if (resultTransport){
             position.processing = true;
-            const resultPosition = await this.almacenRepository.update(position._id, position);
+            const resultPosition = await this.almacenRepository.updateStation(position, {processing: true});
             console.log("Result update psition ", resultPosition);
           }
           console.log("Result transport ", from, to, resultTransport);

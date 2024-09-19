@@ -15,8 +15,12 @@
         <PendingStorageList v-if="selectedMenuItem === 'Pendientes de almacenar'" />
         <MessageQueue v-if="selectedMenuItem === 'Cola de mensajes'" />
         <Gateway v-if="selectedMenuItem === 'Singular'" iframeUrl="http://192.168.0.33" />
-        <Advanced v-if="selectedMenuItem === 'Controles adicionales'" @simulateCarga="simulateCarga"
-          @cancelTransit="$emit('cancelTransit')" @resetApiGateway="$emit('resetApiGateway')" />
+        <Advanced v-if="selectedMenuItem === 'Controles adicionales'" 
+          @simulateCarga="simulateCarga"
+          @cancelTransit="$emit('cancelTransit')" 
+          @resetApiGateway="$emit('resetApiGateway')" 
+          :isTransport="isTransport"
+          @changeTransportFunction="$emit('changeTransportFunction')" />
       </v-col>
     </v-row>
   </div>
@@ -26,10 +30,10 @@
 import { ref,  defineEmits } from 'vue'
 import Gateway from './Gateway.vue'
 import Advanced from './Advanced.vue'
-import OrdersInStorage from './OrdersInStorage.vue'
-import PendingStorageList from './PendingStorageList.vue'
-import CompletedFasesOrder from './CompletedFasesOrder.vue'
-import MessageQueue from '../MessageQueue.vue'
+import OrdersInStorage from './listados/OrdersInStorage.vue'
+import PendingStorageList from './listados/PendingStorageList.vue'
+import CompletedFasesOrder from './listados/CompletedFasesOrder.vue'
+import MessageQueue from './listados/MessageQueue.vue'
 
 
 const menuItems = [
@@ -43,8 +47,14 @@ const menuItems = [
 
 const selectedMenuItem = ref('OFs en almacén');
 
-const emit = defineEmits(['simulateCarga', 'handleDelivery'])
+const emit = defineEmits(['simulateCarga', 'handleDelivery','changeTransportFunction'])
 
+const props = defineProps({
+  isTransport: {
+    type: Boolean,
+    required: true
+  }
+});
 
 function simulateCarga(position){
   emit("simulateCarga",position);
