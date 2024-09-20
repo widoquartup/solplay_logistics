@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "commonjs",
-    "rootDir": "./src",
     "resolveJsonModule": true /* in case you are importing JSON files */,
-    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,12 +10,14 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "allowJs": true,
-
-    "baseUrl": "./src",
+    
+    "baseUrl": ".",
     "paths": {
-      "@base/*": ["base/*"],
-      "@src/*": ["*"]
-    }
+      "@base/*": ["src/base/*"],
+      "@src/*": ["src/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": "./src",
   },
 
   "include": [

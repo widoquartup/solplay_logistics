@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
