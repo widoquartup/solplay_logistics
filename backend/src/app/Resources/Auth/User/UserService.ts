@@ -54,9 +54,10 @@ export class UserService extends ServiceBase<UserType> {
     // const user = await this.repository.findOne({ app, email });
     const {  email, t } = body;
     const user = await this.repository.findOne({  email });
+    console.log("EMAIL", email);
     if (!user) {
       throw new BadRequestException([
-        { message: 'bad user', path: ['user'] }
+        { message: 'bad user2', path: ['user'] }
       ]);
     }
     const code = this.generateRandomCode();

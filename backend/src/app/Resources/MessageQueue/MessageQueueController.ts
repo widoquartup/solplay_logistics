@@ -20,7 +20,7 @@ class MessageQueueController extends ControllerBase<MessageQueueType, MessageQue
             };
                 // $expr: {
                 // }
-            res.locals.response = await this.service.findWithMongo(query, { _id: -1 });
+            res.locals.response = await this.service.findWithMongo(query, { _id: 1 });
             next();
         } catch (error) {
             next(error);

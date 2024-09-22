@@ -21,7 +21,7 @@ import { consumidorDatos } from './services/SolplayMessages/services/Consumer/Da
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = parseInt(process.env.PORT || "3000");
 const app = express();
 
 
@@ -35,6 +35,9 @@ app.use(express.json({ limit: '50mb' }));
 
 // Habilitar el análisis de cuerpos de solicitud URL-encoded (si es necesario para tu API)
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(cors({
+    origin: '*' // Permite cualquier origen para las rutas Express
+}));
 
 async function startApp() {
     interface Route {
@@ -133,7 +136,7 @@ async function startApp() {
     // Inicializar Socket.IO
     SocketHandler.initialize(server);
 
-    server.listen(PORT, () => {
+    server.listen(PORT, '0.0.0.0',  () => {
         console.log(`Servidor ${process.env.USE_HTTPS === 'true' ? 'HTTPS' : 'HTTP'} y WebSocket corriendo en ${process.env.USE_HTTPS === 'true' ? 'https' : 'http'}://localhost:${PORT}`);
         
         // Consumidor de mensajes Kafka

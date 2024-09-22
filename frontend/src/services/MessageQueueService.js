@@ -3,7 +3,7 @@ import BaseService from './BaseService';
 class MessageQueueService extends BaseService {
   async getMessages() {
     try {
-      const response = await this.doPost('message-queue/pending', {}, {
+      const response = await this.doPost('message-queue/  ', {}, {
         headers: await this.getHeaders()
       });
       if (response.data) {

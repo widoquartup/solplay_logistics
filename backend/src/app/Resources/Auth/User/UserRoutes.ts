@@ -37,6 +37,7 @@ const deleteMiddlewares: RequestHandler[] = [auth];
 // middlewares softDelete
 const softDeleteMiddlewares: RequestHandler[] = [auth];
 
+// router.get('/', [], userController.index);
 router.get('/', indexMiddlewares, userController.index);
 router.get('/:user_id', showMiddlewares, userController.show);
 router.post('/', storeMiddlewares, userController.store);
@@ -44,8 +45,8 @@ router.post('/verify-new-user', verifyCodeMiddlewares, userController.verifyNewU
 router.post('/recover-pass', recoverPassMiddlewares, userController.recoverPass);
 router.post('/verify-recover-pass', verifyCodeMiddlewares, userController.verifyRecoverPass);
 router.post('/update-pass', updatePasswordMiddlewares, userController.updatePass);
-router.put('/:user_id', [], userController.update);
-// router.put('/:user_id', updateMiddlewares, userController.update);
+// router.put('/:user_id', [], userController.update);
+router.put('/:user_id', updateMiddlewares, userController.update);
 router.delete('/:user_id', deleteMiddlewares, userController.delete);
 router.patch('/:user_id/softDelete', softDeleteMiddlewares, userController.softDelete);
 
