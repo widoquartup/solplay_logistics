@@ -17,3 +17,16 @@ export interface AlmacenType extends Document {
     createdAt: Date,
     updatedAt: Date
 }
+
+
+export type TransportParameterType = {
+    stationId: number;
+    stationType: number;
+    level: number;
+  };
+  
+
+export type ResponseTransportType = {
+  data: string;
+  code: number;
+}

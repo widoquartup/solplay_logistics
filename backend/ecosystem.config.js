@@ -1,7 +1,8 @@
 module.exports = {
   apps : [{
     name: "backend",
-    script: "./dist/index.js",
+    script: "npm",
+    args: "start",
     cwd: "C:/Users/Almacen Lonas/app_almacen/solplay_logistics/backend",
     env: {
       NODE_ENV: "production",

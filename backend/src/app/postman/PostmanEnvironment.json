@@ -91,6 +91,11 @@
       "key": "variable_id",
       "value": null,
       "enabled": true
+    },
+    {
+      "key": "deliveryordersqueue_id",
+      "value": null,
+      "enabled": true
     }
   ]
 }

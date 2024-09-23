@@ -2,7 +2,7 @@
 import { ServiceBase } from '@base/Bases/ServiceBase';
 import { AlmacenRepository } from './AlmacenRepository';
 import { AlmacenType } from './AlmacenType';
-import { TransportParameterType, ResponseTransportType } from './AlmacenTypes';
+import { TransportParameterType, ResponseTransportType } from './AlmacenType';
 import { TransportService } from '@src/services/SolplayMessages/services/TransportService';
 import { Order } from '../PendingStorage/PendingStorageType';
 

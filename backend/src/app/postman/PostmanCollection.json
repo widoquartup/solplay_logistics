@@ -2012,6 +2012,207 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Deliveryordersqueue",
+      "item": [
+        {
+          "name": "deliveryordersqueue/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "deliveryordersqueue/:deliveryordersqueue_id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/:deliveryordersqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue",
+                "{{deliveryordersqueue_id}}"
+              ]
+            },
+            "event": [
+              {
+                "listen": "prerequest",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.environment.set('deliveryordersqueue_id', pm.variables.get('current_id'));"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "deliveryordersqueue/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue"
+              ]
+            },
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test(\"Set environment variable from response\", function () {",
+                    "    var jsonData = pm.response.json();",
+                    "    pm.environment.set(\"crac_id\", jsonData._id);",
+                    "});"
+                  ]
+                }
+              }
+            ]
+          },
+          "response": []
+        },
+        {
+          "name": "deliveryordersqueue/:deliveryordersqueue_id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/:deliveryordersqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue",
+                "{{deliveryordersqueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "deliveryordersqueue/:deliveryordersqueue_id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/:deliveryordersqueue_id",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue",
+                "{{deliveryordersqueue_id}}"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        },
+        {
+          "name": "deliveryordersqueue/:deliveryordersqueue_id/softDelete",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/delivery-orders-queue/delivery-orders-queue/:deliveryordersqueue_id/softDelete",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "delivery-orders-queue",
+                "delivery-orders-queue",
+                "{{deliveryordersqueue_id}}",
+                "softDelete"
+              ]
+            },
+            "event": []
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }

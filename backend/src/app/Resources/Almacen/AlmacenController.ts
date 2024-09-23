@@ -5,7 +5,7 @@ import { AlmacenService } from './AlmacenService';
 import { AlmacenRepository } from './AlmacenRepository';
 import { AlmacenModel } from './AlmacenModel';
 import { AlmacenType } from './AlmacenType';
-import { TransportParameterType } from './AlmacenTypes';
+import { TransportParameterType } from './AlmacenType';
 import { context } from '@base/context';
 import GestionAlmacenService from '@src/services/SolplayMessages/services/GestionAlmacenService';
 import { getCartBitValuesFromDecimalStatus } from '@src/services/SolplayMessages/helpers/Helpers';

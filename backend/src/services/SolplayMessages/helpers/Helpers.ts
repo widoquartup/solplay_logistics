@@ -9,7 +9,7 @@ import CancelTransit from "../models/messages/send/CancelTransit";
 import Load from "../models/messages/send/Load";
 import Unload from "../models/messages/send/Unload";
 import Transit from "../models/messages/send/Transit";
-import { TransportParameterType } from "@src/app/Resources/Almacen/AlmacenTypes";
+import { TransportParameterType } from "@src/app/Resources/Almacen/AlmacenType";
 import LoadUnloadTransit from "../models/messages/send/LoadUnloadTransit";
 import { MessageQueueFromToType } from "@src/app/Resources/MessageQueue/MessageQueueType";
 import { boolean } from "zod";

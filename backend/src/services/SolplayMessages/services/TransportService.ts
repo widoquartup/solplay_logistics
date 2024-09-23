@@ -2,7 +2,7 @@
 // import { MessageQueueType } from './MessageQueue/MessageQueueType';
 import { context } from '@base/context';
 import { getLoad, getUnload, sleep } from '@src/services/SolplayMessages/helpers/Helpers';
-import { TransportParameterType, ResponseTransportType } from '@src/app/Resources/Almacen/AlmacenTypes';
+import { TransportParameterType, ResponseTransportType } from '@src/app/Resources/Almacen/AlmacenType';
 import CancelTransit from '@src/services/SolplayMessages/models/messages/send/CancelTransit';
 
 import clc from 'cli-color';

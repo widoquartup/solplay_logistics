@@ -11,7 +11,7 @@ import SocketHandler from '@base/Utils/SocketHandler';
 import { Order } from '@src/app/Resources/PendingStorage/PendingStorageType';
 // import { SortValues } from 'mongoose';
 import { SortType } from '@base/Bases/RepositoryInterface';
-import { TransportParameterType } from '@src/app/Resources/Almacen/AlmacenTypes';
+import { TransportParameterType } from '@src/app/Resources/Almacen/AlmacenType';
 import { AlmacenType } from '@src/app/Resources/Almacen/AlmacenType';
 import dotenv from 'dotenv';
 import { CompletedFasesOrderService } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderService';

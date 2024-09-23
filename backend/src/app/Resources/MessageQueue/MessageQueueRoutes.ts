@@ -26,13 +26,14 @@ const deleteMiddlewares: RequestHandler[] = [auth];
 const softDeleteMiddlewares: RequestHandler[] = [auth];
 
 router.get('/', indexMiddlewares, messageQueueController.index);
+router.get('/fake/:cantidad/:station_id/:station_type/:level',[], messageQueueController.fakeMovements);
+router.get('/pending/messages', indexMiddlewares, messageQueueController.pending);
 
 router.get('/:messageQueue_id', showMiddlewares, messageQueueController.show);
 router.post('/', storeMiddlewares, messageQueueController.store);
 router.put('/:messageQueue_id', updateMiddlewares, messageQueueController.update);
 router.delete('/:messageQueue_id', deleteMiddlewares, messageQueueController.delete);
 router.patch('/:messageQueue_id/softDelete', softDeleteMiddlewares, messageQueueController.softDelete);
-router.post('/pending', showMiddlewares, messageQueueController.pending);
 
 // Exportar el router
 export default router;

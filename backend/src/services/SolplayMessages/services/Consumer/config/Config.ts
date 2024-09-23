@@ -8,7 +8,7 @@ import { context } from '@base/context';
 import { CompletedFasesOrderType } from "@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderType";
 import {AlmacenRepository} from '@src/app/Resources/Almacen/AlmacenRepository';
 import {AlmacenModel} from '@src/app/Resources/Almacen/AlmacenModel';
-import { TransportParameterType } from "@src/app/Resources/Almacen/AlmacenTypes";
+import { TransportParameterType } from "@src/app/Resources/Almacen/AlmacenType";
 import { TransportService } from "../../TransportService";
 
 

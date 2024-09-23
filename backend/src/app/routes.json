@@ -42,5 +42,9 @@
     {
         "path": "/api/variable",
         "module": "./app/Resources/Variable/VariableRoutes"
+    },
+    {
+        "path": "/api/deliveryordersqueue/deliveryordersqueue",
+        "module": "./app/Resources/Deliveryordersqueue/DeliveryordersqueueRoutes"
     }
 ]

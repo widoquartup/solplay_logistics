@@ -1,0 +1,66 @@
+{
+    "name": "DeliveryOrdersQueue",
+    "deep": "DeliveryOrdersQueue",
+    "fields": [
+        {
+            "name": "numero_orden",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "fecha_entrega",
+            "required": true,
+            "type": "string"
+        },
+        {
+            "name": "bulto",
+            "required": true,
+            "type": "number"
+        },
+        {
+            "name": "closed",
+            "required": true,
+            "type": "boolean",
+            "mustBeTrue": false
+        },
+        {
+            "name": "date_delivered",
+            "required": false,
+            "type": "date"
+        }
+    ],
+    "routesMiddlewares": {
+        "index": {
+            "base": [
+                "auth"
+            ]
+        },
+        "show": {
+            "base": [
+                "auth"
+            ]
+        },
+        "store": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "update": {
+            "base": [
+                "auth",
+                "validate"
+            ]
+        },
+        "delete": {
+            "base": [
+                "auth"
+            ]
+        },
+        "softDelete": {
+            "base": [
+                "auth"
+            ]
+        }
+    }
+}

@@ -120,16 +120,17 @@ class StationService {
                     }
 
 
-                    // primero comprobar si la orden tiene fases 3 y 4 cerradas buscando en CompletedFasesOrder y la fecha de entrega es <= a hoy entregar
-                    const completedFasesOrder = await this.completedFasesOrderService.getOrder(parseInt(resultsPendingStorage.collection[0].order.number));
+                    // SOLO ALMACENAMOS, YA NO SE COMPRUEBAN FASES ANTES DE ALMACENAR
+                    // // primero comprobar si la orden tiene fases 3 y 4 cerradas buscando en CompletedFasesOrder y la fecha de entrega es <= a hoy entregar
+                    // const completedFasesOrder = await this.completedFasesOrderService.getOrder(parseInt(resultsPendingStorage.collection[0].order.number));
                     
-                    console.log("completedFasesOrder",resultsPendingStorage.collection[0].order.number, completedFasesOrder);
+                    // console.log("completedFasesOrder",resultsPendingStorage.collection[0].order.number, completedFasesOrder);
                     
-                    // existe, hay que entregar el toldo que está en la estación de carga
-                    if (completedFasesOrder){
-                        await this.transportService.deliveryFromLoadStation( parseInt(stationState.stationType) );
-                        return;
-                    }
+                    // // existe, hay que entregar el toldo que está en la estación de carga
+                    // if (completedFasesOrder){
+                    //     await this.transportService.deliveryFromLoadStation( parseInt(stationState.stationType) );
+                    //     return;
+                    // }
 
                     // almacenar la orden que está en la estación de carga
                     this.gestionAlmacenService.sendPendingStorageToAlmacen(parseInt(stationState.stationId), parseInt(stationState.stationType), resultsPendingStorage.collection[0].order);
@@ -170,9 +171,6 @@ class StationService {
             }
         }
     }
-
-
-
 }
 
 export default StationService;

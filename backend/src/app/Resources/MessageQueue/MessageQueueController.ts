@@ -10,6 +10,7 @@ class MessageQueueController extends ControllerBase<MessageQueueType, MessageQue
     constructor(service: MessageQueueService) {
         super(service);
         this.pending = this.pending.bind(this);
+        this.fakeMovements = this.fakeMovements.bind(this);
     }
 
     async pending(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -26,6 +27,26 @@ class MessageQueueController extends ControllerBase<MessageQueueType, MessageQue
             next(error);
         }
     }
+
+
+    async fakeMovements(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            res.locals.params = req.params;
+            const keys = Object.keys(req.params);
+            // const entity = await this.service.show(req.params[keys[0]]);
+            // req.params[keys[0]]
+            res.locals.response = await this.service.generateMovements(
+                parseInt(req.params[keys[0]]),
+                parseInt(req.params[keys[1]]),
+                parseInt(req.params[keys[2]]),
+                parseInt(req.params[keys[3]])
+            );
+            next();
+        } catch (error) {
+            next(error);
+        }
+    }
+
 }
 
 const repository = new MessageQueueRepository(MessageQueueModel);
