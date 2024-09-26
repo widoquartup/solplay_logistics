@@ -14,4 +14,4 @@ const deliveryordersqueueSchema = new Schema({
     strict: true,
 });
 
-export const DeliveryordersqueueModel = mongoose.model<DeliveryordersqueueType & Document>('Deliveryordersqueue', deliveryordersqueueSchema,'deliveryordersqueue');
+export const DeliveryordersqueueModel = mongoose.model<DeliveryordersqueueType & Document>('Deliveryordersqueue', deliveryordersqueueSchema,'deliveryorders_queue');
