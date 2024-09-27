@@ -1,10 +1,10 @@
 /* eslint-disable no-case-declarations */
 import { Kafka, Consumer, EachMessagePayload, KafkaConfig } from 'kafkajs';
 import dotenv from 'dotenv';
-import { CompletedFasesOrderRepository } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderRepository';
-import { CompletedFasesOrderModel } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderModel';
-import { convertQuartupDateToDate } from '../SolplayMessages/helpers/Helpers';
-import { CompletedFasesOrderType } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderType';
+// import { CompletedFasesOrderRepository } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderRepository';
+// import { CompletedFasesOrderModel } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderModel';
+// import { convertQuartupDateToDate } from '../SolplayMessages/helpers/Helpers';
+// import { CompletedFasesOrderType } from '@src/app/Resources/CompletedFasesOrder/CompletedFasesOrderType';
 import * as fs from 'fs';
 import * as path from 'path';
 import GestionAlmacenService from '../SolplayMessages/services/GestionAlmacenService';
@@ -12,12 +12,10 @@ import { context } from '@base/context';
 
 dotenv.config();
 
-const KAFKA_HOST = process.env.KAFKA_HOST || "localhost";
-const KAFKA_PORT = process.env.KAFKA_PORT || "9092";
+const KAFKA_HOST = process.env.KAFKA_HOST || "localhost:9092";
 const KAFKA_TOPIC_OFS_CHANGED = process.env.KAFKA_TOPIC_OFS_CHANGED || "topic-tmp";
 const KAFKA_TOPIC_MOVI_MONTAJE = process.env.KAFKA_TOPIC_MOVI_MONTAJE || "topic2-tmp";
 const KAFKA_CLIENT_ID = process.env.KAFKA_CLIENT_ID || "kafla-id";
-
 
 export interface KafkaMessage {
   [key: string]: any;
@@ -38,10 +36,11 @@ const ssl = {
 //   cert: fs.readFileSync(path.join(certDir, 'certificate.crt'), 'utf-8')
 // };
 
-
+const brokers = KAFKA_HOST.split(",");
+console.log("KAFKA brokers",brokers);
 const kafkaConfig: KafkaConfig = {
   clientId: KAFKA_CLIENT_ID,
-  brokers: [`${KAFKA_HOST}:${KAFKA_PORT}`],
+  brokers: brokers,
   ssl: ssl,
   // sasl: {
   //   mechanism: 'plain', // o 'scram-sha-256' o 'scram-sha-512' según tu configuración
@@ -52,7 +51,10 @@ const kafkaConfig: KafkaConfig = {
 
 const kafka = new Kafka(kafkaConfig);
 
-const consumer: Consumer = kafka.consumer({ groupId: 'solplay' });
+const consumer: Consumer = kafka.consumer({ 
+                                            groupId: 'solplay',
+                                            sessionTimeout: 60000 // 60 segundos (valor en milisegundos))    
+                                          });
 
 const processMessage = async (topic: string, message: string | KafkaMessage): Promise<void> => {
   try {
