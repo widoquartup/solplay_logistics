@@ -21,6 +21,7 @@ export const connectToMongoDB = async () => {
     }
 
     const uri = `${proto}://${username}:${password}@${clusterUrl}/${database}?authSource=${authSource}`;
+    console.log("CONECTANDO A:", uri)
     // const uri = process.env.DB_URI ?? '';
     try {
         await mongoose.connect(uri);

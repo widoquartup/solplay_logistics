@@ -4,7 +4,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile-backend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -12,7 +12,7 @@ services:
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
-    command: npm run start
+    #command: npm run start
 
 volumes:
   node_modules:

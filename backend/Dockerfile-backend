@@ -1,0 +1,16 @@
+# Usa Node.js 18 como base
+FROM node:18
+
+# Crea el directorio de la app
+WORKDIR /usr/src/app
+
+# Copia los archivos package.json y package-lock.json al contenedor
+COPY package*.json ./
+
+# Instala los paquetes de npm
+RUN npm install
+
+# Copia todo el contenido del directorio actual al contenedor
+COPY . .
+
+# No ejecutará nada, pero podrías agregar un CMD si decides iniciar algo.

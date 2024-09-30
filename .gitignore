@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+WiredTiger*.*
 node_modules
 .env
 private.pem
@@ -16,7 +16,8 @@ dist
 dist-ssr
 coverage
 *.local
-
+mongo/data/*
+backend/mongo/data/db/*
 /cypress/videos/
 /cypress/screenshots/
 
@@ -31,4 +32,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
-
+*.wt
+data/
+mongo/data/

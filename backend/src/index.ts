@@ -1,4 +1,12 @@
 import 'module-alias/register';
+import moduleAlias from 'module-alias';
+import path from 'path';
+
+moduleAlias.addAliases({
+    '@base': path.join(__dirname, 'base'),
+    '@src': __dirname,
+  });
+
 import express, { Request, Response, NextFunction } from 'express';
 import { connectToMongoDB } from '@base/mongoConnection';
 import cors from 'cors';
@@ -23,6 +31,7 @@ dotenv.config();
 
 const PORT = parseInt(process.env.PORT || "3000");
 const app = express();
+
 
 
 app.set('trust proxy', true);

@@ -3,7 +3,7 @@ module.exports = {
     name: "backend",
     script: "npm",
     args: "start",
-    cwd: "C:/Users/Almacen Lonas/app_almacen/solplay_logistics/backend",
+    cwd: "/home/almacen-lonas/solplay_logistics/backend",
     env: {
       NODE_ENV: "production",
     },
