@@ -14,7 +14,7 @@
         <CompletedFasesOrder v-if="selectedMenuItem === 'OFs COA/COH cerradas'"/>
         <PendingStorageList v-if="selectedMenuItem === 'Pendientes de almacenar'" />
         <MessageQueue v-if="selectedMenuItem === 'Cola de mensajes'" />
-        <Gateway v-if="selectedMenuItem === 'Singular'" iframeUrl="http://192.168.0.33" />
+        <Gateway v-if="selectedMenuItem === 'Singular'" :iframeUrl="VITE_SINGULAR_GATEWAY_URL" />
         <Advanced v-if="selectedMenuItem === 'Controles adicionales'" 
           @simulateCarga="simulateCarga"
           @cancelTransit="$emit('cancelTransit')" 
@@ -35,6 +35,8 @@ import PendingStorageList from './listados/PendingStorageList.vue'
 import CompletedFasesOrder from './listados/CompletedFasesOrder.vue'
 import MessageQueue from './listados/MessageQueue.vue'
 
+const VITE_SINGULAR_GATEWAY_URL = import.meta.env.VITE_SINGULAR_GATEWAY_URL || '192.168.0.33';
+console.log("VITE_SINGULAR_GATEWAY_URL",VITE_SINGULAR_GATEWAY_URL)
 
 const menuItems = [
   { title: 'OFs en almacén' },
