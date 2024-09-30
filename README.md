@@ -1,7 +1,6 @@
 # solplay_logistics
 
-# Al pasar a producción crear el certificado para kafka en backend
-
+generar backend/src/public.pem y backend/src/private.pem
 
 # Dockers
     docker-compose -f compose-backend.yaml up -d
