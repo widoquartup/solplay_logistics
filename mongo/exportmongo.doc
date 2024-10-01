@@ -1,0 +1,70 @@
+// Definir la base de datos de origen
+const sourceDbName = "solplay_almacen";
+const sourceDb = db.getSiblingDB(sourceDbName);
+
+const backupFolder = '/home/willy/work/QUARTUP/solplay/SOLPLAY_LOGISTICS_APP/mongo/back/2024-10-01'
+
+// Obtener la lista de colecciones de la base de datos origen
+const collections = sourceDb.getCollectionNames();
+
+// Exportar cada colección a un archivo JSON
+collections.forEach((collectionName) => {
+    const docs = sourceDb[collectionName].find().toArray();
+
+    const filePath = `${backupFolder}/${collectionName}.json`;
+    print(`Exportar ${collectionName} a ${filePath}`);
+    
+    if (docs.length > 0) {
+        // Exportar los documentos a un archivo JSON
+        
+        require('fs').writeFileSync(filePath, JSON.stringify(docs));
+        print(`Colección ${collectionName} exportada a ${filePath}`);
+    } else {
+        print(`Colección ${collectionName} está vacía, no se exportó.`);
+    }
+});
+
+
+const targetDbName = "solplay_almacen";
+const targetDb = db.getSiblingDB(targetDbName);
+
+const pathImportacion = 'C:/Users/Almacen Lonas/Downloads/back/'
+// Listar los archivos JSON en el directorio
+const files = require('fs').readdirSync(pathImportacion).filter(file => file.endsWith('.json'));
+
+// Importar cada archivo JSON a su respectiva colección
+files.forEach((fileName) => {
+    const collectionName = fileName.replace('.json', ''); // Obtener el nombre de la colección a partir del archivo
+    const filePath = `${pathImportacion}${fileName}`;
+    
+    // Leer los documentos desde el archivo JSON
+    const docs = JSON.parse(require('fs').readFileSync(filePath));
+    
+    if (docs.length > 0) {
+        // Insertar los documentos en la colección correspondiente
+        targetDb[collectionName].insertMany(docs);
+        print(`Colección ${collectionName} importada con éxito con ${docs.length} documentos.`);
+    } else {
+        print(`Archivo ${fileName} está vacío, no se importó.`);
+    }
+});
+
+print(`Importación de todas las colecciones a ${targetDbName} completada.`);
+
+
+SolplAy_Quartup@9
+Order_use.
+Nombre	Valor	Descripción
+unused	0	El tránsito no está en uso.
+previous	1	El tránsito ha terminado y ha sido reemplazado por el siguiente.
+current	2	Éste es el tránsito en curso actual.
+next	3	Siguiente tránsito a ejecutar.
+
+
+
+
+[ { "_id": "66befb72e31e18a3111d31eb", "station_id": 100, "station_type": 3, "level": 3, "loaded": true, "status_ok": true, "isDeleted": false, "createdAt": "2024-08-14T15:04:53.863Z", "updatedAt": "2024-09-12T07:23:27.900Z", "processing": false, "preferent_order": 0, "order": { "number": "66553", "bulto": 1, "fecha_entrega": "2022-09-29", "delivery_ready": false, "detalle": "TOLDO (solo fase 3)", "cantidad": 10, "cantidad_fabricada": 0 } }, { "_id": "66befb49e31e18a3111d31ea", "station_id": 100, "station_type": 1, "level": 3, "loaded": false, "status_ok": true, "isDeleted": false, "createdAt": "2024-08-14T15:04:53.863Z", "updatedAt": "2024-09-12T07:41:44.144Z", "processing": false, "preferent_order": 0, "order": null } ]
+
+
+
+"order": { "number": "66553", "bulto": 1, "fecha_entrega": "2022-09-29", "delivery_ready": false, "detalle": "TOLDO (solo fase 3)", "cantidad": 10, "cantidad_fabricada": 0 }
