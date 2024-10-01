@@ -35,3 +35,4 @@ backend/mongo/data/db/*
 *.wt
 data/
 mongo/data/
+backend/mongo/data

@@ -1,0 +1,42 @@
+// Nombre de la base de datos que quieres exportar
+const dbName = "solplay_almacen";
+
+// Directorio donde se guardarán los archivos JSON exportados
+const exportDir = "./mongo/back/json/";
+
+// Conectar a la base de datos
+use(dbName);
+
+// Obtener todas las colecciones de la base de datos
+const collections = db.getCollectionNames();
+
+// Crear el directorio de exportación si no existe
+//if (!fs.existsSync(exportDir)){
+//    fs.mkdirSync(exportDir);
+//}
+
+// Iterar sobre cada colección y exportarla
+collections.forEach(collectionName => {
+    print(`Exportando colección: ${collectionName}`);
+    
+    // Construir el comando de exportación
+    const exportCommand = `mongoexport --db=${dbName} --collection=${collectionName} --out=${exportDir}${collectionName}.json`;
+    
+    // Ejecutar el comando
+    try {
+        const result = runCommand({
+            eval: `subprocess.run("${exportCommand}")`,
+            verbosity: "off"
+        });
+        
+        if(result.ok === 1) {
+            print(`Colección ${collectionName} exportada con éxito.`);
+        } else {
+            print(`Error al exportar la colección ${collectionName}: ${result.errmsg}`);
+        }
+    } catch (error) {
+        print(`Error al exportar la colección ${collectionName}: ${error.message}`);
+    }
+});
+
+print("Proceso de exportación completado.");
