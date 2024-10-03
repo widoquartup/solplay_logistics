@@ -6,6 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+!**/logs_importantes/*
+
 WiredTiger*.*
 node_modules
 .env
