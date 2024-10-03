@@ -1,5 +1,3 @@
-# frontend/Dockerfile
-
 # Etapa de construcción
 FROM node:18-alpine AS build
 
@@ -23,6 +21,9 @@ FROM nginx:stable-alpine
 
 # Copiar los archivos construidos al directorio de Nginx
 COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
+# Asegurar permisos correctos
+RUN chmod -R 755 /usr/share/nginx/html
 
 # Copiar configuración de Nginx (opcional)
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf

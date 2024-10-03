@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
+    restart: on-failure:3
     image: mongodb/mongodb-community-server:7.0.5-ubi9
     container_name: solplay_mongodb
     hostname: mongodbhost
@@ -20,6 +21,7 @@ services:
       - app-network
 
   backend:
+    restart: on-failure:3
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -35,24 +37,25 @@ services:
       - MONGO_DB=solplay_almacen
     volumes:
       - ./backend:/usr/src/app
-      - /usr/src/app/node_modules
+      #- /usr/src/app/node_modules
     depends_on:
       - mongodb
     networks:
       - app-network
 
   frontend:
+    restart: always
     build:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend
     ports:
-      - "80:80" # Mapea el puerto 80 del contenedor al 5173 del host
+      - "80:80" 
     environment:
       - VITE_API_BASE_URL=http://localhost:8880
     volumes:
       - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
+      #- /usr/src/app/node_modules
     depends_on:
       - backend
     networks:
